@@ -15,6 +15,8 @@ class StripeTest extends \PHPUnit_Framework_TestCase {
         $stripe = new Stripe("key");
         $cards = $stripe->cards();
         $this->assertInstanceOf('Stripe\Api\Cards', $cards);
+
+	    $customers = $stripe->customers;
+	    $this->assertInstanceOf('Stripe\Api\Customers', $customers);
     }
 }
- 
