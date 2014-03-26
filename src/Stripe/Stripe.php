@@ -14,6 +14,14 @@ use Stripe\Api\Customers;
 use Stripe\Api\Plans;
 use Stripe\Api\Subscriptions;
 
+/**
+ * Class Stripe
+ *
+ * @property Api\Cards $cards
+ * @property Api\Customers $customers
+ * @property Api\Plans $plans
+ * @property Api\Subscriptions $subscriptions
+ */
 class Stripe {
     /**
      * @var Client
@@ -31,6 +39,23 @@ class Stripe {
     public function __construct($apiKey){
         $this->client = new Client($apiKey);
     }
+
+	/**
+	 * Convenience function for accessing cards, customers, plans and subscriptions
+	 *
+	 * @param $name
+	 * @return mixed
+	 */
+	public function __get($name)
+	{
+		$allowed = array('cards', 'customers', 'plans', 'subscriptions');
+
+		if (in_array($name, $allowed)){
+			return $this->{$name}();
+		}
+
+		throw new \UnexpectedValueException(sprintf('Invalid property: %s', $name));
+	}
 
     /**
      * @return Client
