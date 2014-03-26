@@ -76,4 +76,17 @@ class Plans extends AbstractApi
     {
         return $this->client->request('GET', 'plans', 'Stripe\Response\Plans\ListPlansResponse', null, array('count' => $count, 'offset' => $offset));
     }
+
+    /**
+     * @param string $id
+     * @param int $amount
+     * @param string $currency
+     * @param int $interval
+     * @param string $name
+     * @return CreatePlanRequest
+     */
+    public function createPlanRequest($id, $amount, $currency, $interval, $name)
+    {
+        return new CreatePlanRequest($id, $amount, $currency, $interval, $name);
+    }
 } 

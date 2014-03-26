@@ -79,6 +79,22 @@ class Customers extends AbstractApi
     }
 
     /**
+     * @return CreateCustomerRequest
+     */
+    public function createCustomerRequest()
+    {
+        return new CreateCustomerRequest();
+    }
+
+    /**
+     * @return UpdateCustomerRequest
+     */
+    public function updateCustomerRequest()
+    {
+        return new UpdateCustomerRequest();
+    }
+
+    /**
      * @param string $customerId
      * @return string
      */

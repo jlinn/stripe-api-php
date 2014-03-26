@@ -124,6 +124,25 @@ class Cards extends AbstractApi
     }
 
     /**
+     * @param string $number
+     * @param int $expMonth
+     * @param int $expYear
+     * @return CreateCardRequest
+     */
+    public function createCardRequest($number, $expMonth, $expYear)
+    {
+        return new CreateCardRequest($number, $expMonth, $expYear);
+    }
+
+    /**
+     * @return UpdateCardRequest
+     */
+    public function updateCardRequest()
+    {
+        return new UpdateCardRequest();
+    }
+
+    /**
      * @param StripeException $e
      * @return CardDeclinedException|IncorrectNumberException|InvalidCvcException|InvalidExpiryMonthException|InvalidExpiryYearException|StripeException
      */

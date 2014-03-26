@@ -14,12 +14,12 @@ class ListPlansResponse extends AbstractListResponse
 {
     /**
      * @Type("array<Stripe\Response\Plans\PlanResponse>")
-     * @var PlanResponse
+     * @var PlanResponse[]
      */
     protected $data;
 
     /**
-     * @return PlanResponse
+     * @return PlanResponse[]
      */
     public function getData()
     {
@@ -27,7 +27,7 @@ class ListPlansResponse extends AbstractListResponse
     }
 
     /**
-     * @param PlanResponse $data
+     * @param PlanResponse[] $data
      * @return $this
      */
     public function setData($data)

@@ -76,6 +76,23 @@ class Subscriptions extends AbstractApi
     }
 
     /**
+     * @param string $plan
+     * @return CreateSubscriptionRequest
+     */
+    public function createSubscriptionRequest($plan)
+    {
+        return new CreateSubscriptionRequest($plan);
+    }
+
+    /**
+     * @return UpdateSubscriptionRequest
+     */
+    public function updateSubscriptionRequest()
+    {
+        return new UpdateSubscriptionRequest();
+    }
+
+    /**
      * @param string $customerId
      * @param string $subscriptionId
      * @return string

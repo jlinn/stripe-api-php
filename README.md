@@ -1,7 +1,7 @@
 stripe-api-php
 ==============
 
-A PHP client library for [Stripe](https://stripe.com/docs/api)'s API. 
+A PHP client library for [Stripe](https://stripe.com/docs/api)'s API.
 
 ## Usage
 ### Installing via [Composer](https://getcomposer.org/)
