@@ -52,7 +52,7 @@ class Invoices extends AbstractApi
     {
         $data = array();
         if (!is_null($applicationFee)) {
-            $data['applicationFee'] = $applicationFee;
+            $data['application_fee'] = $applicationFee;
         }
         if (!is_null($closed)) {
             $data['closed'] = $closed;
@@ -112,7 +112,7 @@ class Invoices extends AbstractApi
         if (!is_null($subscription)) {
             $data['subscription'] = $subscription;
         }
-        return $this->client->request('DELETE', 'invoices/upcoming', self::INVOICE_RESPONSE_CLASS, null, $data);
+        return $this->client->request('GET', 'invoices/upcoming', self::INVOICE_RESPONSE_CLASS, null, $data);
     }
 
     /**
