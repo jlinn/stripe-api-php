@@ -15,6 +15,7 @@ use Stripe\Api\Customers;
 use Stripe\Api\Invoices;
 use Stripe\Api\Plans;
 use Stripe\Api\Subscriptions;
+use Stripe\Api\Tokens;
 
 /**
  * Class Stripe
@@ -24,6 +25,7 @@ use Stripe\Api\Subscriptions;
  * @property Api\Invoices $invoices
  * @property Api\Plans $plans
  * @property Api\Subscriptions $subscriptions
+ * @property Api\Tokens $tokens
  */
 class Stripe
 {
