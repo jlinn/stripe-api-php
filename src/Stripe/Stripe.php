@@ -12,6 +12,7 @@ use Stripe\Api\AbstractApi;
 use Stripe\Api\Cards;
 use Stripe\Api\Charges;
 use Stripe\Api\Customers;
+use Stripe\Api\Invoices;
 use Stripe\Api\Plans;
 use Stripe\Api\Subscriptions;
 
@@ -20,6 +21,7 @@ use Stripe\Api\Subscriptions;
  *
  * @property Api\Cards $cards
  * @property Api\Customers $customers
+ * @property Api\Invoices $invoices
  * @property Api\Plans $plans
  * @property Api\Subscriptions $subscriptions
  */
@@ -44,7 +46,7 @@ class Stripe
     }
 
     /**
-     * Convenience function for accessing cards, customers, plans and subscriptions
+     * Convenience method for accessing non-existant but available properties
      *
      * @param $name
      * @throws \UnexpectedValueException
@@ -52,7 +54,10 @@ class Stripe
      */
     public function __get($name)
     {
-        $allowed = array('cards', 'charges', 'customers', 'plans', 'subscriptions');
+        $allowed = array(
+            'cards', 'charges', 'customers',
+            'invoices', 'plans', 'subscriptions'
+        );
 
         if (in_array($name, $allowed)) {
             return $this->{$name}();
@@ -91,6 +96,14 @@ class Stripe
     public function customers()
     {
         return $this->getApi('Customers');
+    }
+
+    /**
+     * @return Invoices
+     */
+    public function invoices()
+    {
+        return $this->getApi('Invoices');
     }
 
     /**
