@@ -8,15 +8,15 @@
 namespace Stripe\Tests\Api;
 
 
-use Stripe\Api\Accounts;
+use Stripe\Api\Tokens;
 use Stripe\Tests\StripeTestCase;
 
-class CardsTest extends StripeTestCase
+class TokensTest extends StripeTestCase
 {
     /**
-     * @var Accounts
+     * @var Tokens
      */
-    protected $accounts;
+    protected $tokens;
 
     /**
      * @var string
@@ -26,12 +26,6 @@ class CardsTest extends StripeTestCase
     protected function setUp()
     {
         parent::setUp();
-        $this->accounts = new Accounts($this->client);
-    }
-
-    public function testGetAccount()
-    {
-        $account = $this->accounts->getAccount();
-        $this->assertInstanceOf(Accounts::ACCOUNT_RESPONSE_CLASS, $account);
+        $this->tokens = new Tokens($this->client);
     }
 }

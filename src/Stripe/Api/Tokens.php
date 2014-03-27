@@ -7,6 +7,7 @@
 
 namespace Stripe\Api;
 
+use Stripe\Request\Tokens\CreateTokenRequest;
 use Stripe\Response\Tokens\TokenResponse;
 
 class Tokens extends AbstractApi

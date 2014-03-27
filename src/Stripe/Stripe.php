@@ -61,7 +61,7 @@ class Stripe
     {
         $allowed = array(
             'accounts', 'cards', 'charges', 'customers',
-            'invoices', 'plans', 'subscriptions'
+            'invoices', 'plans', 'subscriptions', 'tokens'
         );
 
         if (in_array($name, $allowed)) {
@@ -133,6 +133,14 @@ class Stripe
     public function subscriptions()
     {
         return $this->getApi('Subscriptions');
+    }
+
+    /**
+     * @return Tokens
+     */
+    public function tokens()
+    {
+        return $this->getApi('Tokens');
     }
 
     /**
