@@ -9,6 +9,7 @@ namespace Stripe;
 
 
 use Stripe\Api\AbstractApi;
+use Stripe\Api\Accounts;
 use Stripe\Api\Cards;
 use Stripe\Api\Charges;
 use Stripe\Api\Customers;
@@ -20,7 +21,9 @@ use Stripe\Api\Tokens;
 /**
  * Class Stripe
  *
+ * @property Api\Accounts
  * @property Api\Cards $cards
+ * @property Api\Charges $charges
  * @property Api\Customers $customers
  * @property Api\Invoices $invoices
  * @property Api\Plans $plans
@@ -48,7 +51,7 @@ class Stripe
     }
 
     /**
-     * Convenience method for accessing non-existant but available properties
+     * Convenience method for accessing non-existent but available properties
      *
      * @param $name
      * @throws \UnexpectedValueException
@@ -57,7 +60,7 @@ class Stripe
     public function __get($name)
     {
         $allowed = array(
-            'cards', 'charges', 'customers',
+            'accounts', 'cards', 'charges', 'customers',
             'invoices', 'plans', 'subscriptions'
         );
 
@@ -74,6 +77,14 @@ class Stripe
     public function getClient()
     {
         return $this->client;
+    }
+
+    /**
+     * @return Accounts
+     */
+    public function accounts()
+    {
+        return $this->getApi('Accounts');
     }
 
     /**
