@@ -73,7 +73,7 @@ class Invoices extends AbstractApi
      */
     public function payInvoice($invoiceId)
     {
-        return $this->client->request('DELETE', 'invoices/' . $invoiceId . '/pay', self::INVOICE_RESPONSE_CLASS);
+        return $this->client->request('POST', 'invoices/' . $invoiceId . '/pay', self::INVOICE_RESPONSE_CLASS);
     }
 
     /**
