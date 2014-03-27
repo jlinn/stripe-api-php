@@ -46,7 +46,7 @@ class Stripe
     }
 
     /**
-     * Convenience function for accessing cards, customers, plans and subscriptions
+     * Convenience method for accessing non-existant but available properties
      *
      * @param $name
      * @throws \UnexpectedValueException
@@ -54,7 +54,10 @@ class Stripe
      */
     public function __get($name)
     {
-        $allowed = array('cards', 'charges', 'customers', 'plans', 'subscriptions');
+        $allowed = array(
+            'cards', 'charges', 'customers',
+            'invoices', 'plans', 'subscriptions'
+        );
 
         if (in_array($name, $allowed)) {
             return $this->{$name}();
