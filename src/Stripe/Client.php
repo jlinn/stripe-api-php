@@ -95,6 +95,7 @@ class Client
         $serializer = SerializerBuilder::create()->build();
         if (!is_null($body)) {
             $body = json_decode($serializer->serialize($body, 'json'), true);
+            $body = $this->convertBooleans($body);
         }
         $request = $client->createRequest($method, $url, null, $body);
         foreach ($params as $key => $value) {
@@ -123,5 +124,27 @@ class Client
             $responseBody = $serializer->deserialize($response->getBody(true), $deserializeTo, 'json');
         }
         return $responseBody;
+    }
+
+    /**
+     * Convert boolean values to strings so that they are sent properly
+     * @param array $request
+     * @return array
+     */
+    protected function convertBooleans(array $request)
+    {
+        foreach ($request as &$value) {
+            if (is_bool($value)) {
+                if ($value) {
+                    $value = 'true';
+                } else {
+                    $value = 'false';
+                }
+            }
+            if (is_array($value)) {
+                $value = $this->convertBooleans($value);
+            }
+        }
+        return $request;
     }
 } 

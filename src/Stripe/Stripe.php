@@ -10,6 +10,7 @@ namespace Stripe;
 
 use Stripe\Api\AbstractApi;
 use Stripe\Api\Cards;
+use Stripe\Api\Charges;
 use Stripe\Api\Customers;
 use Stripe\Api\Plans;
 use Stripe\Api\Subscriptions;
@@ -51,7 +52,7 @@ class Stripe
      */
     public function __get($name)
     {
-        $allowed = array('cards', 'customers', 'plans', 'subscriptions');
+        $allowed = array('cards', 'charges', 'customers', 'plans', 'subscriptions');
 
         if (in_array($name, $allowed)) {
             return $this->{$name}();
@@ -74,6 +75,14 @@ class Stripe
     public function cards()
     {
         return $this->getApi('Cards');
+    }
+
+    /**
+     * @return Charges
+     */
+    public function charges()
+    {
+        return $this->getApi('Charges');
     }
 
     /**
