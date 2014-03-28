@@ -1,6 +1,8 @@
 stripe-api-php
 ==============
 
+[![Build Status](https://secure.travis-ci.org/jlinn/stripe-api-php.png?branch=master)](http://travis-ci.org/jlinn/stripe-api-php)
+
 A PHP client library for [Stripe](https://stripe.com/docs/api)'s API.
 
 ## Usage
