@@ -15,7 +15,8 @@
 
     <php>
         <!-- copy this file to phpunit.xml and replace enter your test key to run tests -->
-        <server name="API_KEY" value="your_test_key" />
+        <!-- This is currently using the Stripe Test API Key -->
+        <server name="API_KEY" value="tGN0bIwXnHdwOa85VABjPdSn8nWY7G7I" />
     </php>
 
     <testsuites>
