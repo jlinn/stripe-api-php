@@ -89,7 +89,7 @@ class InvoiceResponse
      * @Type("string")
      * @var string
      */
-    protected $peroidEnd;
+    protected $periodEnd;
 
     /**
      * @Type("string")
@@ -524,21 +524,21 @@ class InvoiceResponse
     }
 
     /**
-     * @param string $peroidEnd
+     * @param string $periodEnd
      * @return $this
      */
-    public function setPeroidEnd($peroidEnd)
+    public function setPeriodEnd($periodEnd)
     {
-        $this->peroidEnd = $peroidEnd;
+        $this->periodEnd = $periodEnd;
         return $this;
     }
 
     /**
      * @return string
      */
-    public function getPeroidEnd()
+    public function getPeriodEnd()
     {
-        return $this->peroidEnd;
+        return $this->periodEnd;
     }
 
     /**
