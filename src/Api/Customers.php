@@ -17,6 +17,7 @@ use Stripe\Response\DeleteResponse;
 class Customers extends AbstractApi
 {
     const CUSTOMER_RESPONSE_CLASS = 'Stripe\Response\Customers\CustomerResponse';
+    const LIST_CUSTOMERS_RESPONSE_CLASS = 'Stripe\Response\Customers\ListCustomersResponse';
 
     /**
      * @param CreateCustomerRequest $request
@@ -75,7 +76,7 @@ class Customers extends AbstractApi
         if (!is_null($created)) {
             $params['created'] = $created;
         }
-        return $this->client->get('customers', 'Stripe\Response\Customers\ListCustomersResponse', null, $params);
+        return $this->client->get('customers', self::LIST_CUSTOMERS_RESPONSE_CLASS, null, $params);
     }
 
     /**

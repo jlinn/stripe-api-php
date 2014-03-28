@@ -22,6 +22,9 @@ use Stripe\StripeException;
 
 class Cards extends AbstractApi
 {
+    const CARD_RESPONSE_CLASS = 'Stripe\Response\Cards\CardResponse';
+    const LIST_CARDS_RESPONSE_CLASS = 'Stripe\Response\Cards\ListCardsResponse';
+
     /**
      * @param string $customerId
      * @param string $token
@@ -32,7 +35,7 @@ class Cards extends AbstractApi
     public function createCardFromToken($customerId, $token)
     {
         try {
-            $response = $this->client->post($this->buildUrl($customerId), 'Stripe\Response\Cards\CardResponse', array('card' => $token));
+            $response = $this->client->post($this->buildUrl($customerId), self::CARD_RESPONSE_CLASS, array('card' => $token));
         } catch (StripeException $e) {
             throw $this->handleError($e);
         }
@@ -50,7 +53,7 @@ class Cards extends AbstractApi
     public function createCard($customerId, CreateCardRequest $request)
     {
         try {
-            $response = $this->client->post($this->buildUrl($customerId), 'Stripe\Response\Cards\CardResponse', array('card' => $request));
+            $response = $this->client->post($this->buildUrl($customerId), self::CARD_RESPONSE_CLASS, array('card' => $request));
         } catch (StripeException $e) {
             throw $this->handleError($e);
         }
@@ -68,7 +71,7 @@ class Cards extends AbstractApi
     public function updateCard($customerId, $cardId, UpdateCardRequest $request)
     {
         try {
-            $response = $this->client->post($this->buildUrl($customerId, $cardId), 'Stripe\Response\Cards\CardResponse', $request);
+            $response = $this->client->post($this->buildUrl($customerId, $cardId), self::CARD_RESPONSE_CLASS, $request);
         } catch (StripeException $e) {
             throw $this->handleError($e);
         }
@@ -83,7 +86,7 @@ class Cards extends AbstractApi
      */
     public function getCard($customerId, $cardId)
     {
-        return $this->client->get($this->buildUrl($customerId, $cardId), 'Stripe\Response\Cards\CardResponse');
+        return $this->client->get($this->buildUrl($customerId, $cardId), self::CARD_RESPONSE_CLASS);
     }
 
     /**
@@ -93,7 +96,7 @@ class Cards extends AbstractApi
      */
     public function deleteCard($customerId, $cardId)
     {
-        return $this->client->delete($this->buildUrl($customerId, $cardId), 'Stripe\Response\DeleteResponse');
+        return $this->client->delete($this->buildUrl($customerId, $cardId), self::DELETE_RESPONSE_CLASS);
     }
 
     /**
@@ -105,7 +108,7 @@ class Cards extends AbstractApi
      */
     public function listCards($customerId, $count = 10, $offset = 0)
     {
-        return $this->client->get($this->buildUrl($customerId), 'Stripe\Response\Cards\ListCardsResponse', null, array('count' => $count, 'offset' => $offset));
+        return $this->client->get($this->buildUrl($customerId), self::LIST_CARDS_RESPONSE_CLASS, null, array('count' => $count, 'offset' => $offset));
     }
 
     /**

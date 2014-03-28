@@ -130,7 +130,8 @@ class CardsTest extends StripeTestCase
         $this->cards->createCard($this->customerId, new CreateCardRequest(self::MASTERCARD_1, 2, 2020));
         $cards = $this->cards->listCards($this->customerId);
 
-        $this->assertEquals(2, $cards->getCount());
+        $this->assertInstanceOf(Cards::LIST_CARDS_RESPONSE_CLASS, $cards);
+
         foreach ($cards->getData() as $card) {
             $this->assertInstanceOf('Stripe\Response\Cards\CardResponse', $card);
         }

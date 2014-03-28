@@ -16,6 +16,7 @@ use Stripe\Response\Subscriptions\SubscriptionResponse;
 class Subscriptions extends AbstractApi
 {
     const SUBSCRIPTION_RESPONSE_CLASS = 'Stripe\Response\Subscriptions\SubscriptionResponse';
+    const LIST_SUBSCRIPTIONS_RESPONSE_CLASS = 'Stripe\Response\Subscriptions\ListSubscriptionsResponse';
 
     /**
      * @param string $customerId
@@ -72,7 +73,7 @@ class Subscriptions extends AbstractApi
      */
     public function listSubscriptions($customerId, $count = 10, $offset = 0)
     {
-        return $this->client->get($this->buildUrl($customerId), 'Stripe\Response\Subscriptions\ListSubscriptionsResponse', null, array('count' => $count, 'offset' => $offset));
+        return $this->client->get($this->buildUrl($customerId), self::LIST_SUBSCRIPTIONS_RESPONSE_CLASS, null, array('count' => $count, 'offset' => $offset));
     }
 
     /**

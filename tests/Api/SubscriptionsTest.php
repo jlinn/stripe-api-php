@@ -112,8 +112,7 @@ class SubscriptionsTest extends StripeTestCase
 
         $listResponse = $this->subscriptions->listSubscriptions($this->customerId);
 
-        $this->assertInstanceOf('Stripe\Response\Subscriptions\ListSubscriptionsResponse', $listResponse);
-        $this->assertEquals(2, $listResponse->getCount());
+        $this->assertInstanceOf(Subscriptions::LIST_SUBSCRIPTIONS_RESPONSE_CLASS, $listResponse);
         foreach ($listResponse->getData() as $data) {
             $this->assertInstanceOf(Subscriptions::SUBSCRIPTION_RESPONSE_CLASS, $data);
         }
