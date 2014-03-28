@@ -45,7 +45,7 @@ class SubscriptionsTest extends StripeTestCase
         $this->plans = new Plans($this->client);
         $customer = $this->client->request('POST', 'customers');
         $this->customerId = $customer['id'];
-        $this->planId = $this->plans->createPlan(new CreatePlanRequest("test_plan", 350, "usd", "month", "test plan"))->getId();
+        $this->planId = $this->plans->createPlan(new CreatePlanRequest("test_plan" . rand(0, 999999), 350, "usd", "month", "test plan"))->getId();
     }
 
     protected function tearDown()

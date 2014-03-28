@@ -27,16 +27,17 @@ class PlansTest extends StripeTestCase
 
     public function testCreatePlan()
     {
-        $response = $this->plans->createPlan(new CreatePlanRequest("test_plan", 350, "usd", "month", "test plan"));
+        $name = "test_plan" . rand(0, 999999);
+        $response = $this->plans->createPlan(new CreatePlanRequest($name, 350, "usd", "month", "test plan"));
         $this->assertInstanceOf(Plans::PLAN_RESPONSE_CLASS, $response);
-        $this->assertEquals("test_plan", $response->getId());
+        $this->assertEquals($name, $response->getId());
 
         $this->client->request('DELETE', 'plans/' . $response->getId());
     }
 
     public function testGetPlan()
     {
-        $createResponse = $this->plans->createPlan(new CreatePlanRequest("test_plan", 350, "usd", "month", "test plan"));
+        $createResponse = $this->createPlan();
         $getResponse = $this->plans->getPlan($createResponse->getId());
 
         $this->assertInstanceOf(Plans::PLAN_RESPONSE_CLASS, $getResponse);
@@ -49,7 +50,7 @@ class PlansTest extends StripeTestCase
 
     public function testUpdatePlan()
     {
-        $createResponse = $this->plans->createPlan(new CreatePlanRequest("test_plan", 350, "usd", "month", "test plan"));
+        $createResponse = $this->createPlan();
         $name = "updated name";
         $updateResponse = $this->plans->updatePlan($createResponse->getId(), $name);
         $this->assertEquals($name, $updateResponse->getName());
@@ -60,11 +61,19 @@ class PlansTest extends StripeTestCase
 
     public function testDeletePlan()
     {
-        $createResponse = $this->plans->createPlan(new CreatePlanRequest("test_plan", 350, "usd", "month", "test plan"));
+        $createResponse = $this->createPlan();
         $deleteResponse = $this->plans->deletePlan($createResponse->getId());
 
         $this->assertInstanceOf(Plans::DELETE_RESPONSE_CLASS, $deleteResponse);
         $this->assertTrue($deleteResponse->getDeleted());
+    }
+
+    /**
+     * @return \Stripe\Response\Plans\PlanResponse
+     */
+    protected function createPlan()
+    {
+        return $this->plans->createPlan(new CreatePlanRequest("test_plan" . rand(0, 999999), 350, "usd", "month", "test plan"));
     }
 }
  
