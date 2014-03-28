@@ -42,3 +42,4 @@ This library is a work in progress. Currently, handling of the following resourc
 * invoices
 * plans
 * subscriptions
+* tokens
