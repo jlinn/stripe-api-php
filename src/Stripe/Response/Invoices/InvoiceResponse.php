@@ -9,7 +9,6 @@ namespace Stripe\Response\Invoices;
 
 use JMS\Serializer\Annotation\Type;
 use Stripe\Response\Discounts\DiscountResponse;
-use Stripe\Response\Invoices\ListLineItemsResponse;
 
 class InvoiceResponse
 {

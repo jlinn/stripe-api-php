@@ -13,6 +13,7 @@ use Stripe\Api\Accounts;
 use Stripe\Api\Cards;
 use Stripe\Api\Charges;
 use Stripe\Api\Customers;
+use Stripe\Api\InvoiceItems;
 use Stripe\Api\Invoices;
 use Stripe\Api\Plans;
 use Stripe\Api\Subscriptions;
@@ -24,6 +25,7 @@ use Stripe\Api\Subscriptions;
  * @property Api\Cards $cards
  * @property Api\Charges $charges
  * @property Api\Customers $customers
+ * @property Api\InvoiceItems $invoiceItems
  * @property Api\Invoices $invoices
  * @property Api\Plans $plans
  * @property Api\Subscriptions $subscriptions
@@ -59,7 +61,7 @@ class Stripe
     {
         $allowed = array(
             'accounts', 'cards', 'charges', 'customers',
-            'invoices', 'plans', 'subscriptions'
+            'invoiceItems', 'invoices', 'plans', 'subscriptions'
         );
 
         if (in_array($name, $allowed)) {
@@ -107,6 +109,14 @@ class Stripe
     public function customers()
     {
         return $this->getApi('Customers');
+    }
+
+    /**
+     * @return InvoiceItems
+     */
+    public function invoiceItems()
+    {
+        return $this->getApi('InvoiceItems');
     }
 
     /**

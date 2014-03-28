@@ -38,6 +38,7 @@ This library is a work in progress. Currently, handling of the following resourc
 * cards
 * charges
 * customers
+* invoice items
 * invoices
 * plans
 * subscriptions

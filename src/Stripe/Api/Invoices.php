@@ -9,11 +9,9 @@ namespace Stripe\Api;
 
 
 use Stripe\Request\Invoices\CreateInvoiceRequest;
-use Stripe\Response\DeleteResponse;
-use Stripe\Response\Invoices\ListInvoicesResponse;
 use Stripe\Response\Invoices\InvoiceResponse;
+use Stripe\Response\Invoices\ListInvoicesResponse;
 use Stripe\Response\Invoices\ListLineItemsResponse;
-use Stripe\Response\Invoices\LineItemResponse;
 
 class Invoices extends AbstractApi
 {

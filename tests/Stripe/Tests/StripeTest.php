@@ -20,5 +20,8 @@ class StripeTest extends \PHPUnit_Framework_TestCase
 
         $customers = $stripe->customers;
         $this->assertInstanceOf('Stripe\Api\Customers', $customers);
+
+        $invoiceItems = $stripe->invoiceItems;
+        $this->assertInstanceOf('Stripe\Api\InvoiceItems', $invoiceItems);
     }
 }

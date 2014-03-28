@@ -11,7 +11,6 @@ namespace Stripe\Tests\Api;
 use Stripe\Api\Customers;
 use Stripe\Api\Invoices;
 use Stripe\Request\Cards\CreateCardRequest;
-use Stripe\Response\Invoices\InvoiceResponse;
 use Stripe\Tests\StripeTestCase;
 
 class InvoicesTest extends StripeTestCase
