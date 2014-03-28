@@ -39,3 +39,4 @@ This library is a work in progress. Currently, handling of the following resourc
 * customers
 * plans
 * subscriptions
+* tokens

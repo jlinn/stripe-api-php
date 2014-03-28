@@ -2,110 +2,80 @@
 /**
  * User: Don Gilbert
  * Date: 3/27/2014
- * Time: 4:50 PM
+ * Time: 11:07 PM
  */
 
-namespace Stripe\Response\Tokens;
+namespace Stripe\Request\Tokens;
 
-use JMS\Serializer\Annotation\Type;
 
-class CardResponse
+class CreateCardTokenRequest
 {
     /**
-     * @Type("string")
      * @var string
      */
-    protected $id;
+    protected $number;
 
     /**
-     * @Type("string")
      * @var string
-     */
-    protected $object;
-
-    /**
-     * @Type("integer")
-     * @var int
-     */
-    protected $last4;
-
-    /**
-     * @Type("string")
-     * @var string
-     */
-    protected $type;
-
-    /**
-     * @Type("integer")
-     * @var int
      */
     protected $expMonth;
 
     /**
-     * @Type("integer")
-     * @var int
+     * @var string
      */
     protected $expYear;
 
     /**
-     * @Type("string")
      * @var string
      */
-    protected $fingerprint;
+    protected $cvc;
 
     /**
-     * @Type("string")
-     * @var string
-     */
-    protected $customer;
-
-    /**
-     * @Type("string")
-     * @var string
-     */
-    protected $country;
-
-    /**
-     * @Type("string")
      * @var string
      */
     protected $name;
 
     /**
-     * @Type("string")
      * @var string
      */
     protected $addressLine1;
 
     /**
-     * @Type("string")
      * @var string
      */
     protected $addressLine2;
 
     /**
-     * @Type("string")
      * @var string
      */
     protected $addressCity;
 
     /**
-     * @Type("string")
      * @var string
      */
     protected $addressState;
 
     /**
-     * @Type("string")
      * @var string
      */
     protected $addressZip;
 
     /**
-     * @Type("string")
      * @var string
      */
     protected $addressCountry;
+
+    /**
+     * @param string $number
+     * @param string $expMonth
+     * @param string $expYear
+     */
+    public function __construct($number, $expMonth, $expYear)
+    {
+        $this->number = $number;
+        $this->expMonth = $expMonth;
+        $this->expYear = $expYear;
+    }
 
     /**
      * @param string $addressCity
@@ -216,42 +186,6 @@ class CardResponse
     }
 
     /**
-     * @param string $country
-     * @return $this
-     */
-    public function setCountry($country)
-    {
-        $this->country = $country;
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getCountry()
-    {
-        return $this->country;
-    }
-
-    /**
-     * @param string $customer
-     * @return $this
-     */
-    public function setCustomer($customer)
-    {
-        $this->customer = $customer;
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getCustomer()
-    {
-        return $this->customer;
-    }
-
-    /**
      * @param int $expMonth
      * @return $this
      */
@@ -288,60 +222,6 @@ class CardResponse
     }
 
     /**
-     * @param string $fingerprint
-     * @return $this
-     */
-    public function setFingerprint($fingerprint)
-    {
-        $this->fingerprint = $fingerprint;
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getFingerprint()
-    {
-        return $this->fingerprint;
-    }
-
-    /**
-     * @param string $id
-     * @return $this
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @param int $last4
-     * @return $this
-     */
-    public function setLast4($last4)
-    {
-        $this->last4 = $last4;
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getLast4()
-    {
-        return $this->last4;
-    }
-
-    /**
      * @param string $name
      * @return $this
      */
@@ -360,38 +240,38 @@ class CardResponse
     }
 
     /**
-     * @param string $object
+     * @param string $cvc
      * @return $this
      */
-    public function setObject($object)
+    public function setCvc($cvc)
     {
-        $this->object = $object;
+        $this->cvc = $cvc;
         return $this;
     }
 
     /**
      * @return string
      */
-    public function getObject()
+    public function getCvc()
     {
-        return $this->object;
+        return $this->cvc;
     }
 
     /**
-     * @param string $type
+     * @param string $number
      * @return $this
      */
-    public function setType($type)
+    public function setNumber($number)
     {
-        $this->type = $type;
+        $this->number = $number;
         return $this;
     }
 
     /**
      * @return string
      */
-    public function getType()
+    public function getNumber()
     {
-        return $this->type;
+        return $this->number;
     }
 }
