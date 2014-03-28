@@ -19,6 +19,6 @@ class Accounts extends AbstractApi
      */
     public function getAccount()
     {
-        return $this->client->request('GET', 'account', self::ACCOUNT_RESPONSE_CLASS);
+        return $this->client->get('account', self::ACCOUNT_RESPONSE_CLASS);
     }
 }

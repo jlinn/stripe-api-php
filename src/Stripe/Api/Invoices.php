@@ -24,7 +24,7 @@ class Invoices extends AbstractApi
      */
     public function createInvoice(CreateInvoiceRequest $request)
     {
-        return $this->client->request('POST', 'invoices', self::INVOICE_RESPONSE_CLASS, $request);
+        return $this->client->post('invoices', self::INVOICE_RESPONSE_CLASS, $request);
     }
 
     /**
@@ -34,7 +34,7 @@ class Invoices extends AbstractApi
      */
     public function getInvoice($invoiceId)
     {
-        return $this->client->request('GET', 'invoices/' . $invoiceId, self::INVOICE_RESPONSE_CLASS);
+        return $this->client->get('invoices/' . $invoiceId, self::INVOICE_RESPONSE_CLASS);
     }
 
     /**
@@ -61,7 +61,7 @@ class Invoices extends AbstractApi
         if (!is_null($metadata)) {
             $data['metadata'] = $metadata;
         }
-        return $this->client->request('POST', 'invoices/' . $invoiceId, self::INVOICE_RESPONSE_CLASS, $data);
+        return $this->client->post('invoices/' . $invoiceId, self::INVOICE_RESPONSE_CLASS, $data);
     }
 
     /**
@@ -71,7 +71,7 @@ class Invoices extends AbstractApi
      */
     public function payInvoice($invoiceId)
     {
-        return $this->client->request('POST', 'invoices/' . $invoiceId . '/pay', self::INVOICE_RESPONSE_CLASS);
+        return $this->client->post('invoices/' . $invoiceId . '/pay', self::INVOICE_RESPONSE_CLASS);
     }
 
     /**
@@ -82,7 +82,7 @@ class Invoices extends AbstractApi
      */
     public function listInvoices($count = 10, $offset = 0)
     {
-        return $this->client->request('GET', 'invoices', 'Stripe\Response\Invoices\ListInvoicesResponse', null, array('count' => $count, 'offset' => $offset));
+        return $this->client->get('invoices', 'Stripe\Response\Invoices\ListInvoicesResponse', null, array('count' => $count, 'offset' => $offset));
     }
 
     /**
@@ -95,7 +95,7 @@ class Invoices extends AbstractApi
      */
     public function listInvoiceLineItems($invoiceId, $count = 10, $offset = 0)
     {
-        return $this->client->request('GET', 'invoices/' . $invoiceId . '/lines', 'Stripe\Response\Invoices\ListLineItemsResponse', null, array('count' => $count, 'offset' => $offset));
+        return $this->client->get('invoices/' . $invoiceId . '/lines', 'Stripe\Response\Invoices\ListLineItemsResponse', null, array('count' => $count, 'offset' => $offset));
     }
 
     /**
@@ -110,7 +110,7 @@ class Invoices extends AbstractApi
         if (!is_null($subscription)) {
             $data['subscription'] = $subscription;
         }
-        return $this->client->request('GET', 'invoices/upcoming', self::INVOICE_RESPONSE_CLASS, null, $data);
+        return $this->client->get('invoices/upcoming', self::INVOICE_RESPONSE_CLASS, null, $data);
     }
 
     /**
