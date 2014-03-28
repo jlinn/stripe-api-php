@@ -8,7 +8,9 @@
 namespace Stripe\Tests\Api;
 
 
+use Stripe\Api\Customers;
 use Stripe\Api\Invoices;
+use Stripe\Request\Cards\CreateCardRequest;
 use Stripe\Response\Invoices\InvoiceResponse;
 use Stripe\Tests\StripeTestCase;
 
@@ -19,47 +21,80 @@ class InvoicesTest extends StripeTestCase
      */
     protected $invoices;
 
+    /**
+     * @var Customers
+     */
+    protected $customers;
+
+    /**
+     * @var string
+     */
+    protected $customerId;
+
     protected function setUp()
     {
         parent::setUp();
         $this->invoices = new Invoices($this->client);
+        $this->customers = new Customers($this->client);
+        $customerRequest = $this->customers->createCustomerRequest()->setCard(new CreateCardRequest(self::VISA_1, 1, 2020));
+        $this->customerId = $this->customers->createCustomer($customerRequest)->getId();
     }
+
+    protected function tearDown()
+    {
+        parent::tearDown();
+        $this->customers->deleteCustomer($this->customerId);
+    }
+
 
     public function testCreateInvoice()
     {
-        $this->markTestIncomplete("Can't complete until InvoiceItems are completed.");
-
-        $request = $this->invoices->createInvoiceRequest('cus_3kB8eDAq7nCO0P');
+        $this->client->post('invoiceitems', null, array('customer' => $this->customerId, 'amount' => 350, 'currency' => 'usd'));
+        $request = $this->invoices->createInvoiceRequest($this->customerId);
         $invoice = $this->invoices->createInvoice($request);
 
-        $this->assertInstanceOf('Stripe\\Response\\Invoices\\InvoiceResponse', $invoice);
+        $this->assertInstanceOf(Invoices::INVOICE_RESPONSE_CLASS, $invoice);
     }
 
     public function testGetInvoice()
     {
-        $invoice = $this->invoices->getInvoice('in_103kBJ2eZvKYlo2CHhxDPH2k');
-        $this->assertInstanceOf('Stripe\\Response\\Invoices\\InvoiceResponse', $invoice);
+        $this->client->post('invoiceitems', null, array('customer' => $this->customerId, 'amount' => 350, 'currency' => 'usd'));
+
+        $request = $this->invoices->createInvoiceRequest($this->customerId);
+        $createResponse = $this->invoices->createInvoice($request);
+
+        $this->assertInstanceOf(Invoices::INVOICE_RESPONSE_CLASS, $createResponse);
+
+        $invoice = $this->invoices->getInvoice($createResponse->getId());
+        $this->assertInstanceOf(Invoices::INVOICE_RESPONSE_CLASS, $invoice);
     }
 
     public function testUpdateInvoice()
     {
-        $this->markTestIncomplete("Can't complete until InvoiceItems are completed.");
+        $this->client->post('invoiceitems', null, array('customer' => $this->customerId, 'amount' => 350, 'currency' => 'usd'));
 
-        $request = $this->invoices->createInvoiceRequest('cus_3kB8eDAq7nCO0P');
+        $request = $this->invoices->createInvoiceRequest($this->customerId);
         $invoice = $this->invoices->createInvoice($request);
 
         $updatedInvoice = $this->invoices->updateInvoice($invoice->getId(), null, false, 'Updated Description', array('updated' => 'metadata'));
-        $this->assertInstanceOf('Stripe\\Response\\Invoices\\InvoiceResponse', $updatedInvoice);
+        $this->assertInstanceOf(Invoices::INVOICE_RESPONSE_CLASS, $updatedInvoice);
 
         $this->assertEquals(null, $updatedInvoice->getApplicationFee());
-        $this->assertEquals(true, $updatedInvoice->getClosed());
+        $this->assertEquals(false, $updatedInvoice->getClosed());
         $this->assertEquals('Updated Description', $updatedInvoice->getDescription());
         $this->assertEquals(array('updated' => 'metadata'), $updatedInvoice->getMetadata());
     }
 
     public function testPayInvoice()
     {
-        $this->markTestIncomplete("Can't complete until InvoiceItems are completed.");
+        $this->client->post('invoiceitems', null, array('customer' => $this->customerId, 'amount' => 350, 'currency' => 'usd'));
+
+        $request = $this->invoices->createInvoiceRequest($this->customerId);
+        $invoice = $this->invoices->createInvoice($request);
+
+        $payResponse = $this->invoices->payInvoice($invoice->getId());
+
+        $this->assertInstanceOf(Invoices::INVOICE_RESPONSE_CLASS, $payResponse);
     }
 
     public function testListInvoices()
@@ -70,14 +105,21 @@ class InvoicesTest extends StripeTestCase
 
     public function testListInvoiceLineItems()
     {
-        $this->markTestIncomplete("Can't complete until InvoiceItems are completed.");
+        $this->client->post('invoiceitems', null, array('customer' => $this->customerId, 'amount' => 350, 'currency' => 'usd'));
+
+        $request = $this->invoices->createInvoiceRequest($this->customerId);
+        $invoice = $this->invoices->createInvoice($request);
+
+        $lineItemsResponse = $this->invoices->listInvoiceLineItems($invoice->getId());
+
+        $this->assertInstanceOf('Stripe\Response\Invoices\ListLineItemsResponse', $lineItemsResponse);
     }
 
     public function testGetUpcomingInvoice()
     {
-        $this->markTestIncomplete("Can't complete until InvoiceItems are completed.");
+        $this->client->post('invoiceitems', null, array('customer' => $this->customerId, 'amount' => 350, 'currency' => 'usd'));
 
-        $invoices = $this->invoices->getUpcomingInvoice('cus_3kB8eDAq7nCO0P');
-        $this->assertInstanceOf('Stripe\\Response\\Invoices\\ListInvoiceItemsResponse', $invoices);
+        $invoices = $this->invoices->getUpcomingInvoice($this->customerId);
+        $this->assertInstanceOf(Invoices::INVOICE_RESPONSE_CLASS, $invoices);
     }
 }

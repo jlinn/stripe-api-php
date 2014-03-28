@@ -34,8 +34,10 @@ $customer = $stripe->customers()->getCustomer("customer_id");
 ## Development Status
 This library is a work in progress. Currently, handling of the following resources has been implemented:
 
+* accounts
 * cards
 * charges
 * customers
+* invoices
 * plans
 * subscriptions
