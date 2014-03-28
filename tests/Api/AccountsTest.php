@@ -11,7 +11,7 @@ namespace Stripe\Tests\Api;
 use Stripe\Api\Accounts;
 use Stripe\Tests\StripeTestCase;
 
-class CardsTest extends StripeTestCase
+class AccountsTest extends StripeTestCase
 {
     /**
      * @var Accounts

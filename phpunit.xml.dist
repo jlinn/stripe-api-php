@@ -20,7 +20,7 @@
 
     <testsuites>
         <testsuite>
-            <directory>./tests/Stripe/Tests</directory>
+            <directory>./tests</directory>
         </testsuite>
     </testsuites>
 
