@@ -25,7 +25,7 @@ class Subscriptions extends AbstractApi
      */
     public function createSubscription($customerId, CreateSubscriptionRequest $request)
     {
-        return $this->client->request('POST', $this->buildUrl($customerId), self::SUBSCRIPTION_RESPONSE_CLASS, $request);
+        return $this->client->post($this->buildUrl($customerId), self::SUBSCRIPTION_RESPONSE_CLASS, $request);
     }
 
     /**
@@ -36,7 +36,7 @@ class Subscriptions extends AbstractApi
      */
     public function getSubscription($customerId, $subscriptionId)
     {
-        return $this->client->request('GET', $this->buildUrl($customerId, $subscriptionId), self::SUBSCRIPTION_RESPONSE_CLASS);
+        return $this->client->get($this->buildUrl($customerId, $subscriptionId), self::SUBSCRIPTION_RESPONSE_CLASS);
     }
 
     /**
@@ -48,7 +48,7 @@ class Subscriptions extends AbstractApi
      */
     public function updateSubscription($customerId, $subscriptionId, UpdateSubscriptionRequest $request)
     {
-        return $this->client->request('POST', $this->buildUrl($customerId, $subscriptionId), self::SUBSCRIPTION_RESPONSE_CLASS, $request);
+        return $this->client->post($this->buildUrl($customerId, $subscriptionId), self::SUBSCRIPTION_RESPONSE_CLASS, $request);
     }
 
     /**
@@ -60,7 +60,7 @@ class Subscriptions extends AbstractApi
      */
     public function cancelSubscription($customerId, $subscriptionId, $atPeriodEnd = false)
     {
-        return $this->client->request('DELETE', $this->buildUrl($customerId, $subscriptionId), self::SUBSCRIPTION_RESPONSE_CLASS, null, array('at_period_end' => $atPeriodEnd));
+        return $this->client->delete($this->buildUrl($customerId, $subscriptionId), self::SUBSCRIPTION_RESPONSE_CLASS, null, array('at_period_end' => $atPeriodEnd));
     }
 
     /**
@@ -72,7 +72,7 @@ class Subscriptions extends AbstractApi
      */
     public function listSubscriptions($customerId, $count = 10, $offset = 0)
     {
-        return $this->client->request('GET', $this->buildUrl($customerId), 'Stripe\Response\Subscriptions\ListSubscriptionsResponse', null, array('count' => $count, 'offset' => $offset));
+        return $this->client->get($this->buildUrl($customerId), 'Stripe\Response\Subscriptions\ListSubscriptionsResponse', null, array('count' => $count, 'offset' => $offset));
     }
 
     /**
@@ -105,4 +105,4 @@ class Subscriptions extends AbstractApi
         }
         return $url;
     }
-} 
+}

@@ -24,7 +24,7 @@ class Plans extends AbstractApi
      */
     public function createPlan(CreatePlanRequest $request)
     {
-        return $this->client->request('POST', 'plans', self::PLAN_RESPONSE_CLASS, $request);
+        return $this->client->post('plans', self::PLAN_RESPONSE_CLASS, $request);
     }
 
     /**
@@ -34,7 +34,7 @@ class Plans extends AbstractApi
      */
     public function getPlan($planId)
     {
-        return $this->client->request('GET', 'plans/' . $planId, self::PLAN_RESPONSE_CLASS);
+        return $this->client->get('plans/' . $planId, self::PLAN_RESPONSE_CLASS);
     }
 
     /**
@@ -53,7 +53,7 @@ class Plans extends AbstractApi
         if (!is_null($metadata)) {
             $data['metadata'] = $metadata;
         }
-        return $this->client->request('POST', 'plans/' . $planId, self::PLAN_RESPONSE_CLASS, $data);
+        return $this->client->post('plans/' . $planId, self::PLAN_RESPONSE_CLASS, $data);
     }
 
     /**
@@ -63,7 +63,7 @@ class Plans extends AbstractApi
      */
     public function deletePlan($planId)
     {
-        return $this->client->request('DELETE', 'plans/' . $planId, self::DELETE_RESPONSE_CLASS);
+        return $this->client->delete('plans/' . $planId, self::DELETE_RESPONSE_CLASS);
     }
 
     /**
@@ -74,7 +74,7 @@ class Plans extends AbstractApi
      */
     public function listPlans($count = 10, $offset = 0)
     {
-        return $this->client->request('GET', 'plans', 'Stripe\Response\Plans\ListPlansResponse', null, array('count' => $count, 'offset' => $offset));
+        return $this->client->get('plans', 'Stripe\Response\Plans\ListPlansResponse', null, array('count' => $count, 'offset' => $offset));
     }
 
     /**
@@ -89,4 +89,4 @@ class Plans extends AbstractApi
     {
         return new CreatePlanRequest($id, $amount, $currency, $interval, $name);
     }
-} 
+}

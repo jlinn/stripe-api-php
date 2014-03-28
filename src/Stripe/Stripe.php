@@ -22,7 +22,7 @@ use Stripe\Api\Tokens;
 /**
  * Class Stripe
  *
- * @property Api\Accounts
+ * @property Api\Accounts $accounts
  * @property Api\Cards $cards
  * @property Api\Charges $charges
  * @property Api\Customers $customers
