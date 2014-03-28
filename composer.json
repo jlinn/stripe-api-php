@@ -2,7 +2,7 @@
     "name": "jlinn/stripe-api-php",
     "type": "library",
     "description": "A PHP client library for Stripe's REST API",
-    "keywords": ["stripe"],
+    "keywords": ["stripe", "api", "payments"],
     "license": "MIT",
     "authors": [
         {
@@ -19,9 +19,9 @@
         "phpunit/phpunit": "~3.7"
     },
     "autoload": {
-        "psr-0": {
-            "Stripe": "src/",
-            "Stripe\\Tests": "tests/"
+        "psr-4": {
+            "Stripe\\": "src/",
+            "Stripe\\Tests\\": "tests/"
         }
     }
 }
