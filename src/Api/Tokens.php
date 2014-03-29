@@ -7,14 +7,14 @@
 
 namespace Stripe\Api;
 
-use Stripe\Request\Tokens\CreateCardTokenRequest;
-use Stripe\Request\Tokens\CreateBankAccountTokenRequest;
-use Stripe\Response\Tokens\TokenResponse;
 use Stripe\Exception\CardDeclinedException;
 use Stripe\Exception\IncorrectNumberException;
 use Stripe\Exception\InvalidCvcException;
 use Stripe\Exception\InvalidExpiryMonthException;
 use Stripe\Exception\InvalidExpiryYearException;
+use Stripe\Request\Tokens\CreateBankAccountTokenRequest;
+use Stripe\Request\Tokens\CreateCardTokenRequest;
+use Stripe\Response\Tokens\TokenResponse;
 use Stripe\StripeException;
 
 class Tokens extends AbstractApi

@@ -12,6 +12,7 @@ use Stripe\Api\AbstractApi;
 use Stripe\Api\Accounts;
 use Stripe\Api\Cards;
 use Stripe\Api\Charges;
+use Stripe\Api\Coupons;
 use Stripe\Api\Customers;
 use Stripe\Api\InvoiceItems;
 use Stripe\Api\Invoices;
@@ -25,6 +26,7 @@ use Stripe\Api\Tokens;
  * @property Api\Accounts $accounts
  * @property Api\Cards $cards
  * @property Api\Charges $charges
+ * @property Api\Coupons $coupons
  * @property Api\Customers $customers
  * @property Api\InvoiceItems $invoiceItems
  * @property Api\Invoices $invoices
@@ -62,7 +64,7 @@ class Stripe
     public function __get($name)
     {
         $allowed = array(
-            'accounts', 'cards', 'charges', 'customers',
+            'accounts', 'cards', 'charges', 'coupons', 'customers',
             'invoiceItems', 'invoices', 'plans', 'subscriptions', 'tokens'
         );
 
@@ -95,6 +97,14 @@ class Stripe
     public function cards()
     {
         return $this->getApi('Cards');
+    }
+
+    /**
+     * @return Coupons
+     */
+    public function coupons()
+    {
+        return $this->getApi('Coupons');
     }
 
     /**

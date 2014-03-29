@@ -39,6 +39,7 @@ This library is a work in progress. Currently, handling of the following resourc
 * accounts
 * cards
 * charges
+* coupons
 * customers
 * invoice items
 * invoices
