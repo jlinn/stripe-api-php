@@ -48,6 +48,8 @@ class CouponsTest extends StripeTestCase
 
         $this->assertInstanceOf(Coupons::COUPON_RESPONSE_CLASS, $getResponse);
         $this->assertEquals($createResponse->getId(), $getResponse->getId());
+
+        $this->client->delete('coupons/' . $createResponse->getId());
     }
 
     public function testDeleteCoupon()
