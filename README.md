@@ -42,6 +42,7 @@ This library is a work in progress. Currently, handling of the following resourc
 * coupons
 * customers
 * discounts
+* disputes
 * invoice items
 * invoices
 * plans
