@@ -70,8 +70,8 @@ class Stripe
     public function __get($name)
     {
         $allowed = array(
-            'accounts', 'cards', 'charges', 'coupons', 'customers', 'discounts',
-            'disputes', 'invoiceItems', 'invoices', 'plans', 'recipients', 'subscriptions', 'tokens'
+            'accounts', 'cards', 'charges', 'coupons', 'customers', 'discounts', 'disputes',
+            'invoiceItems', 'invoices', 'plans', 'recipients', 'subscriptions', 'tokens', 'transfers'
         );
 
         if (in_array($name, $allowed)) {
