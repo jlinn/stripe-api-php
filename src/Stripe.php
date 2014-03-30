@@ -27,6 +27,7 @@ use Stripe\Api\Tokens;
  * Class Stripe
  *
  * @property Api\Accounts $accounts
+ * @property Api\Balance $balance
  * @property Api\Cards $cards
  * @property Api\Charges $charges
  * @property Api\Coupons $coupons
@@ -70,7 +71,7 @@ class Stripe
     public function __get($name)
     {
         $allowed = array(
-            'accounts', 'cards', 'charges', 'coupons', 'customers', 'discounts', 'disputes',
+            'accounts', 'balance', 'cards', 'charges', 'coupons', 'customers', 'discounts', 'disputes',
             'invoiceItems', 'invoices', 'plans', 'recipients', 'subscriptions', 'tokens', 'transfers'
         );
 
@@ -95,6 +96,11 @@ class Stripe
     public function accounts()
     {
         return $this->getApi('Accounts');
+    }
+
+    public function balance()
+    {
+        return $this->getApi('Balance');
     }
 
     /**
