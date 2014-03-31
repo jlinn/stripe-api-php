@@ -36,6 +36,12 @@ class RefundResponse
     protected $currency;
 
     /**
+     * @Type("string")
+     * @var string
+     */
+    protected $balanceTransaction;
+
+    /**
      * @return int
      */
     public function getAmount()
@@ -107,5 +113,21 @@ class RefundResponse
         return $this;
     }
 
+    /**
+     * @return string
+     */
+    public function getBalanceTransaction()
+    {
+        return $this->balanceTransaction;
+    }
 
+    /**
+     * @param string $balanceTransaction
+     * @return $this
+     */
+    public function setBalanceTransaction($balanceTransaction)
+    {
+        $this->balanceTransaction = $balanceTransaction;
+        return $this;
+    }
 }

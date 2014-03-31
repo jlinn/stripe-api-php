@@ -10,6 +10,7 @@ namespace Stripe;
 
 use Stripe\Api\AbstractApi;
 use Stripe\Api\Accounts;
+use Stripe\Api\ApplicationFees;
 use Stripe\Api\Cards;
 use Stripe\Api\Charges;
 use Stripe\Api\Coupons;
@@ -27,6 +28,7 @@ use Stripe\Api\Tokens;
  * Class Stripe
  *
  * @property Api\Accounts $accounts
+ * @property Api\ApplicationFees $applicationFees
  * @property Api\Balance $balance
  * @property Api\Cards $cards
  * @property Api\Charges $charges
@@ -71,8 +73,8 @@ class Stripe
     public function __get($name)
     {
         $allowed = array(
-            'accounts', 'balance', 'cards', 'charges', 'coupons', 'customers', 'discounts', 'disputes',
-            'invoiceItems', 'invoices', 'plans', 'recipients', 'subscriptions', 'tokens', 'transfers'
+            'accounts', 'applicationFees', 'balance', 'cards', 'charges', 'coupons', 'customers', 'discounts',
+            'disputes', 'invoiceItems', 'invoices', 'plans', 'recipients', 'subscriptions', 'tokens', 'transfers'
         );
 
         if (in_array($name, $allowed)) {
@@ -96,6 +98,14 @@ class Stripe
     public function accounts()
     {
         return $this->getApi('Accounts');
+    }
+
+    /**
+     * @return ApplicationFees
+     */
+    public function applicationFees()
+    {
+        return $this->getApi('ApplicationFees');
     }
 
     public function balance()
