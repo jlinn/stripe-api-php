@@ -8,10 +8,11 @@
 namespace Stripe\Response\ApplicationFees;
 
 
-use Stripe\Response\Charges\RefundResponse;
 use JMS\Serializer\Annotation\Type;
+use Stripe\Response\Charges\RefundResponse;
 
-class ApplicationFeeResponse {
+class ApplicationFeeResponse
+{
     /**
      * @Type("string")
      * @var string
