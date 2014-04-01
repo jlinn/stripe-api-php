@@ -20,12 +20,13 @@ $stripe = new Stripe("your_api_key");
 
 #### Customers calls
 ```php
-use Stripe\Request\Customers\CreateCustomerRequest;
+use Stripe\Request\Cards\CreateCardRequest;
 
 // create a customer
-$request = new CreateCustomerRequest();
+$request = $stripe->customers->createCustomerRequest();
 $request->setEmail("foo@bar.com")->setDescription("A customer!");
-$customer = $stripe->customers()->createCustomer($request);
+$request->setCard(new CreateCardRequest("4242424242424242", 1, 2020));
+$customer = $stripe->customers->createCustomer($request);
 // get the newly-created customer's id
 $customerId = $customer->getId();
 
@@ -33,23 +34,15 @@ $customerId = $customer->getId();
 $customer = $stripe->customers()->getCustomer("customer_id");
 ```
 
-## Development Status
-This library is a work in progress. Currently, handling of the following resources has been implemented:
+#### Charges calls
+```php
+// create a charge
+$request = $stripe->charges->createChargeRequest(350, "usd")->setCustomer($customer->getId());
+$stripe->charges->createCharge($request);
 
-* accounts
-* application fees
-* balance
-* cards
-* charges
-* coupons
-* customers
-* discounts
-* disputes
-* events
-* invoice items
-* invoices
-* plans
-* recipients
-* subscriptions
-* tokens
-* transfers
+// retrieve a charge
+$charge = $stripe->charges->getCharge("charge_id");
+```
+
+## Development Status
+Currently, all Stripe API calls which do not require [Stripe Connect](https://stripe.com/docs/connect) have been implemented.  Documentation and Stripe Connect calls are next on the to-do list.
