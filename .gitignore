@@ -1,0 +1,11 @@
+# IDEs
+.idea/
+*.iml
+
+# composer
+/vendor/
+composer.lock
+
+phpunit.xml
+.DS_Store
+.couscous

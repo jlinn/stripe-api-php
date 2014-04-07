@@ -54,38 +54,24 @@
             </div>
         </div>
 
-            <div class="container">
-        <div class="jumbotron">
-            <h1>stripe-api-php</h1>
-            <p>An object-oriented PHP client library for <a href="https://stripe.com/docs/api">Stripe</a>'s API.</p>
-        </div>
-        <section><p><a href="http://travis-ci.org/jlinn/stripe-api-php"><img alt="Build Status" src="https://secure.travis-ci.org/jlinn/stripe-api-php.png?branch=master" /></a></p>
-<p>Stripe has built a very well-designed REST API to give developers access to their payment processing services. Their official PHP client library, while functional and flexible, left a bit to be desired in the ease of use department. This library aims to provide all of the functionality included in the official library while being extremely self-explanatory.</p>
-<h2>Installing via <a href="https://getcomposer.org/">Composer</a></h2>
-<pre><code class="language-bash">$ php composer.phar require jlinn/stripe-api-php:~1.0</code></pre>
-<h2>Documentation</h2>
-<ul>
-<li><a href="usage.html">Basic Usage</a></li>
-<li><a href="api/accounts.html">Accounts</a></li>
-<li><a href="api/applicationfees.html">Application Fees</a></li>
-<li><a href="api/balance.html">Balance</a></li>
-<li><a href="api/cards.html">Cards</a></li>
-<li><a href="api/charges.html">Charges</a></li>
-<li><a href="api/charges.html">Coupons</a></li>
-<li><a href="api/customers.html">Customers</a></li>
-<li><a href="api/discounts.html">Discounts</a></li>
-<li><a href="api/disputes.html">Disputes</a></li>
-<li><a href="api/events.html">Events</a></li>
-<li><a href="api/invoiceitems.html">Invoice Items</a></li>
-<li><a href="api/invoices.html">Invoices</a></li>
-<li><a href="api/plans.html">Plans</a></li>
-<li><a href="api/recipients.html">Recipients</a></li>
-<li><a href="api/subscriptions.html">Subscriptions</a></li>
-<li><a href="api/tokens.html">Tokens</a></li>
-<li><a href="api/transfers.html">Transfers</a></li>
-</ul></section>
-    </div>
-
+                    <div class="container">
+                <section>
+                    <h1><a href="https://github.com/jlinn/stripe-api-php/blob/master/src/Api/Plans.php">Plans</a></h1>
+<h2>Create a plan</h2>
+<p>The <code>createPlan()</code> method takes a <a href="https://github.com/jlinn/stripe-api-php/blob/master/src/Request/Plans/CreatePlanRequest.php"><code>CreatePlanRequest</code></a> object as its only parameter.</p>
+<pre><code class="language-php">$request = $stripe-&gt;createPlanRequest("plan_name", 350, "usd", "month", "A new plan.");
+$stripe-&gt;plans-&gt;createPlan($request);</code></pre>
+<h2>Retrieve a plan</h2>
+<pre><code class="language-php">$plan = $stripe-&gt;plans-&gt;getPlan("plan_id");</code></pre>
+<h2>Update a plan</h2>
+<pre><code class="language-php">$stripe-&gt;plans-&gt;updatePlan("plan_id", "New plan name.");</code></pre>
+<h2>Delete a plan</h2>
+<pre><code class="language-php">$stripe-&gt;plans-&gt;deletePlan("plan_id");</code></pre>
+<h2>List plans</h2>
+<pre><code class="language-php">$plans = $stripe-&gt;plans-&gt;listPlans();</code></pre>
+                </section>
+            </div>
+        
         <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
         <script src="http://yandex.st/highlightjs/8.0/highlight.min.js"></script>
