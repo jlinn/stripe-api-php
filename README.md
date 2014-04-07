@@ -5,6 +5,9 @@ stripe-api-php
 
 A PHP client library for [Stripe](https://stripe.com/docs/api)'s API.
 
+## Documentation
+More comprehensive documentation for this library can be found [here](http://jlinn.github.io/stripe-api-php).
+
 ## Usage
 ### Installing via [Composer](https://getcomposer.org/)
 ```bash
