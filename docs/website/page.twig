@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>stripe-api-php</title>
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="{{ baseUrl }}/css/github.css">
+        <link rel="stylesheet" href="{{ baseUrl }}/css/theme.css">
+        <link rel="stylesheet" href="{{ baseUrl }}/css/hovernav.css">
+    </head>
+    <body>
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <a href="{{ baseUrl }}/" class="navbar-brand">stripe-api-php</a>
+                    <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="navbar-main">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="navbar-collapse collapse" id="navbar-main">
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Documentation <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{{ baseUrl }}/usage.html">Basic Usage</a></li>
+                                <li class="divider"></li>
+                                <li><a href="{{ baseUrl }}/api/accounts.html">Accounts</a></li>
+                                <li><a href="{{ baseUrl }}/api/applicationfees.html">Application Fees</a></li>
+                                <li><a href="{{ baseUrl }}/api/balance.html">Balance</a></li>
+                                <li><a href="{{ baseUrl }}/api/cards.html">Cards</a></li>
+                                <li><a href="{{ baseUrl }}/api/charges.html">Charges</a></li>
+                                <li><a href="{{ baseUrl }}/api/coupons.html">Coupons</a></li>
+                                <li><a href="{{ baseUrl }}/api/customers.html">Customers</a></li>
+                                <li><a href="{{ baseUrl }}/api/discounts.html">Discounts</a></li>
+                                <li><a href="{{ baseUrl }}/api/disputes.html">Disputes</a></li>
+                                <li><a href="{{ baseUrl }}/api/events.html">Events</a></li>
+                                <li><a href="{{ baseUrl }}/api/invoiceitems.html">Invoice Items</a></li>
+                                <li><a href="{{ baseUrl }}/api/invoices.html">Invoices</a></li>
+                                <li><a href="{{ baseUrl }}/api/plans.html">Plans</a></li>
+                                <li><a href="{{ baseUrl }}/api/recipients.html">Recipients</a></li>
+                                <li><a href="{{ baseUrl }}/api/subscriptions.html">Subscriptions</a></li>
+                                <li><a href="{{ baseUrl }}/api/tokens.html">Tokens</a></li>
+                                <li><a href="{{ baseUrl }}/api/transfers.html">Transfers</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="https://github.com/jlinn/stripe-api-php">GitHub</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        {% block content %}
+            <div class="container">
+                <section>
+                    {{ content|raw }}
+                </section>
+            </div>
+        {% endblock %}
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <script src="http://yandex.st/highlightjs/8.0/highlight.min.js"></script>
+        <script src="{{ baseUrl }}/js/hovernav.js"></script>
+        <script>
+            $(function(){
+                $('.language-php').addClass("php");
+                $('.language-bash').addClass("bash");
+                $('pre code').each(function(i, e) {hljs.highlightBlock(e)});
+            });
+        </script>
+
+    </body>
+</html>

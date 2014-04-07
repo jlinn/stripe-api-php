@@ -1,0 +1,11 @@
+baseUrl: http://jlinn.github.io/stripe-api-php
+
+directory: docs/website
+
+exclude:
+    - vendor
+    - ""
+
+after:
+    - mv .couscous/generated/docs/* .couscous/generated/
+    - rm -rf .couscous/generated/docs

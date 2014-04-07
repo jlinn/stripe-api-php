@@ -42,6 +42,7 @@ class Tokens extends AbstractApi
     }
 
     /**
+     * @param string $tokenId
      * @return TokenResponse
      * @link https://stripe.com/docs/api/curl#retrieve_token
      */

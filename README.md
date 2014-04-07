@@ -8,7 +8,7 @@ A PHP client library for [Stripe](https://stripe.com/docs/api)'s API.
 ## Usage
 ### Installing via [Composer](https://getcomposer.org/)
 ```bash
-php composer.phar require jlinn/stripe-api-php
+$ php composer.phar require jlinn/stripe-api-php
 ```
 
 ### Making API Calls
