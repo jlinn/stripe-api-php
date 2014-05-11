@@ -5,7 +5,6 @@
  * Time: 12:56 PM
  */
 
-\Doctrine\Common\Annotations\AnnotationRegistry::registerLoader('class_exists');
 
 namespace Stripe;
 
@@ -26,6 +25,8 @@ use Stripe\Api\Recipients;
 use Stripe\Api\Subscriptions;
 use Stripe\Api\Tokens;
 use Stripe\Api\Transfers;
+
+\Doctrine\Common\Annotations\AnnotationRegistry::registerLoader('class_exists');
 
 /**
  * Class Stripe
