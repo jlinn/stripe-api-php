@@ -5,6 +5,8 @@
  * Time: 12:56 PM
  */
 
+\Doctrine\Common\Annotations\AnnotationRegistry::registerLoader('class_exists');
+
 namespace Stripe;
 
 use Stripe\Api\AbstractApi;
