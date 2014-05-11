@@ -221,6 +221,14 @@ class Stripe
     }
 
     /**
+     * @return Transfers
+     */
+    public function transfers()
+    {
+        return $this->getApi('Transfers');
+    }
+
+    /**
      * @param string $class
      * @return AbstractApi
      */
