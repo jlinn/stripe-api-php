@@ -24,6 +24,7 @@ use Stripe\Api\Plans;
 use Stripe\Api\Recipients;
 use Stripe\Api\Subscriptions;
 use Stripe\Api\Tokens;
+use Stripe\Api\Transfers;
 
 /**
  * Class Stripe
