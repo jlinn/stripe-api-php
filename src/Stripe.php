@@ -7,8 +7,6 @@
 
 namespace Stripe;
 
-\Doctrine\Common\Annotations\AnnotationRegistry::registerAutoloadNamespace('JMS\Serializer\Annotation', dirname(__DIR__) . '/vendor/jms/serializer/src');
-
 use Stripe\Api\AbstractApi;
 use Stripe\Api\Accounts;
 use Stripe\Api\ApplicationFees;
