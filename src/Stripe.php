@@ -26,7 +26,6 @@ use Stripe\Api\Subscriptions;
 use Stripe\Api\Tokens;
 use Stripe\Api\Transfers;
 
-\Doctrine\Common\Annotations\AnnotationRegistry::registerLoader('class_exists');
 
 /**
  * Class Stripe
@@ -65,6 +64,7 @@ class Stripe
      */
     public function __construct($apiKey)
     {
+        \Doctrine\Common\Annotations\AnnotationRegistry::registerLoader('class_exists');
         $this->client = new Client($apiKey);
     }
 
