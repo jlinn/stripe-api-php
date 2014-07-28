@@ -5,7 +5,7 @@
  * Time: 10:55 PM
  */
 
-namespace Stripe\Response\Charges;
+namespace Stripe\Response\Refunds;
 
 use JMS\Serializer\Annotation\Type;
 

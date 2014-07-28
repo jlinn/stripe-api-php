@@ -97,6 +97,18 @@ class TransferResponse
     protected $statementDescription;
 
     /**
+     * @Type("string")
+     * @var string
+     */
+    protected $failureCode;
+
+    /**
+     * @Type("string")
+     * @var string
+     */
+    protected $failureMessage;
+
+    /**
      * @return BankAccountResponse
      */
     public function getAccount()
@@ -345,6 +357,42 @@ class TransferResponse
     public function setStatus($status)
     {
         $this->status = $status;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFailureCode()
+    {
+        return $this->failureCode;
+    }
+
+    /**
+     * @param string $failureCode
+     * @return $this
+     */
+    public function setFailureCode($failureCode)
+    {
+        $this->failureCode = $failureCode;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFailureMessage()
+    {
+        return $this->failureMessage;
+    }
+
+    /**
+     * @param string $failureMessage
+     * @return $this
+     */
+    public function setFailureMessage($failureMessage)
+    {
+        $this->failureMessage = $failureMessage;
         return $this;
     }
 }

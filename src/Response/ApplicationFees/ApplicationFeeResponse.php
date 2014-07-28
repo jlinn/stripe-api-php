@@ -9,7 +9,7 @@ namespace Stripe\Response\ApplicationFees;
 
 
 use JMS\Serializer\Annotation\Type;
-use Stripe\Response\Charges\RefundResponse;
+use Stripe\Response\Refunds\RefundResponse;
 
 class ApplicationFeeResponse
 {
@@ -81,7 +81,7 @@ class ApplicationFeeResponse
 
     /**
      * @Type("array<Stripe\Response\Charges\RefundResponse>")
-     * @var RefundResponse[]
+     * @var \Stripe\Response\Refunds\RefundResponse[]
      */
     protected $refunds;
 
@@ -308,7 +308,7 @@ class ApplicationFeeResponse
     }
 
     /**
-     * @return \Stripe\Response\Charges\RefundResponse[]
+     * @return \Stripe\Response\Refunds\RefundResponse[]
      */
     public function getRefunds()
     {
@@ -316,7 +316,7 @@ class ApplicationFeeResponse
     }
 
     /**
-     * @param \Stripe\Response\Charges\RefundResponse[] $refunds
+     * @param \Stripe\Response\Refunds\RefundResponse[] $refunds
      * @return $this
      */
     public function setRefunds($refunds)

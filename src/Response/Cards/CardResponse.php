@@ -52,6 +52,18 @@ class CardResponse
      * @Type("string")
      * @var string
      */
+    protected $brand;
+
+    /**
+     * @Type("string")
+     * @var string
+     */
+    protected $funding;
+
+    /**
+     * @Type("string")
+     * @var string
+     */
     protected $customer;
 
     /**
@@ -444,5 +456,39 @@ class CardResponse
         return $this;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getBrand()
+    {
+        return $this->brand;
+    }
 
+    /**
+     * @param mixed $brand
+     * @return $this
+     */
+    public function setBrand($brand)
+    {
+        $this->brand = $brand;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFunding()
+    {
+        return $this->funding;
+    }
+
+    /**
+     * @param string $funding
+     * @return $this
+     */
+    public function setFunding($funding)
+    {
+        $this->funding = $funding;
+        return $this;
+    }
 }
