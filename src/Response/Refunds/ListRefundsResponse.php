@@ -11,7 +11,8 @@ namespace Stripe\Response\Refunds;
 use JMS\Serializer\Annotation\Type;
 use Stripe\Response\AbstractListResponse;
 
-class ListRefundsResponse extends AbstractListResponse{
+class ListRefundsResponse extends AbstractListResponse
+{
     /**
      * @Type("Stripe\Response\Refunds\RefundResponse")
      * @var RefundResponse[]

@@ -9,7 +9,6 @@ namespace Stripe\Response\ApplicationFees;
 
 
 use JMS\Serializer\Annotation\Type;
-use Stripe\Response\Refunds\RefundResponse;
 
 class ApplicationFeeResponse
 {

@@ -106,7 +106,9 @@ class Client
                     $value = 'false';
                 }
             }
-            $request->getQuery()->set($key, $value);
+            if (!is_null($value)) {
+                $request->getQuery()->set($key, $value);
+            }
         }
         try {
             $response = $request->send();
