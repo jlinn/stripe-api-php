@@ -9,8 +9,10 @@ namespace Stripe\Tests\Api;
 
 
 use Stripe\Api\Charges;
+use Stripe\Api\Tokens;
 use Stripe\Request\Cards\CreateCardRequest;
 use Stripe\Request\Charges\CreateChargeRequest;
+use Stripe\Request\Tokens\CreateCardTokenRequest;
 use Stripe\Tests\StripeTestCase;
 
 class ChargesTest extends StripeTestCase
@@ -30,6 +32,18 @@ class ChargesTest extends StripeTestCase
     {
         $request = new CreateChargeRequest(350, "usd");
         $request->setCard(new CreateCardRequest(self::VISA_1, 1, 2020));
+        $response = $this->charges->createCharge($request);
+
+        $this->assertInstanceOf(Charges::CHARGE_RESPONSE_CLASS, $response);
+    }
+
+    public function testCreateChargeWithToken(){
+        // create a token
+        $tokens = new Tokens($this->client);
+        $tokenResponse = $tokens->createCardToken(new CreateCardTokenRequest(self::VISA_1, 1, 2020));
+
+        $request = new CreateChargeRequest(350, "usd");
+        $request->setCard($tokenResponse->getId());
         $response = $this->charges->createCharge($request);
 
         $this->assertInstanceOf(Charges::CHARGE_RESPONSE_CLASS, $response);
