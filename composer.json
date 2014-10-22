@@ -1,15 +1,6 @@
 {
-    "name": "jlinn/stripe-api-php",
+    "name": "urakozz/stripe-api-php",
     "type": "library",
-    "description": "A PHP client library for Stripe's REST API",
-    "keywords": ["stripe", "api", "payments"],
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Joe Linn",
-            "homepage": "https://github.com/jlinn"
-        }
-    ],
     "require": {
         "php": ">=5.3.2",
         "guzzle/guzzle": "~3.8",

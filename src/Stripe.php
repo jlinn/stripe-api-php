@@ -5,8 +5,8 @@
  * Time: 12:56 PM
  */
 
-namespace Stripe;
 
+namespace Stripe;
 
 use Stripe\Api\AbstractApi;
 use Stripe\Api\Accounts;
@@ -25,6 +25,8 @@ use Stripe\Api\Recipients;
 use Stripe\Api\Refunds;
 use Stripe\Api\Subscriptions;
 use Stripe\Api\Tokens;
+use Stripe\Api\Transfers;
+
 
 /**
  * Class Stripe
@@ -64,6 +66,7 @@ class Stripe
      */
     public function __construct($apiKey)
     {
+        \Doctrine\Common\Annotations\AnnotationRegistry::registerLoader('class_exists');
         $this->client = new Client($apiKey);
     }
 
@@ -228,6 +231,14 @@ class Stripe
     public function tokens()
     {
         return $this->getApi('Tokens');
+    }
+
+    /**
+     * @return Transfers
+     */
+    public function transfers()
+    {
+        return $this->getApi('Transfers');
     }
 
     /**
