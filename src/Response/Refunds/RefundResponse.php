@@ -5,12 +5,18 @@
  * Time: 10:55 PM
  */
 
-namespace Stripe\Response\Charges;
+namespace Stripe\Response\Refunds;
 
 use JMS\Serializer\Annotation\Type;
 
 class RefundResponse
 {
+    /**
+     * @Type("string")
+     * @var string
+     */
+    protected $id;
+
     /**
      * @Type("string")
      * @var string
@@ -40,6 +46,36 @@ class RefundResponse
      * @var string
      */
     protected $balanceTransaction;
+
+    /**
+     * @Type("string")
+     * @var string
+     */
+    protected $charge;
+
+    /**
+     * @Type("array")
+     * @var array
+     */
+    protected $metadata;
+
+    /**
+     * @return string
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param string $id
+     * @return $this
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+        return $this;
+    }
 
     /**
      * @return int
@@ -128,6 +164,42 @@ class RefundResponse
     public function setBalanceTransaction($balanceTransaction)
     {
         $this->balanceTransaction = $balanceTransaction;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCharge()
+    {
+        return $this->charge;
+    }
+
+    /**
+     * @param string $charge
+     * @return $this
+     */
+    public function setCharge($charge)
+    {
+        $this->charge = $charge;
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getMetadata()
+    {
+        return $this->metadata;
+    }
+
+    /**
+     * @param array $metadata
+     * @return $this
+     */
+    public function setMetadata($metadata)
+    {
+        $this->metadata = $metadata;
         return $this;
     }
 }

@@ -163,6 +163,12 @@ class InvoiceResponse
     protected $metadata;
 
     /**
+     * @Type("boolean")
+     * @var bool
+     */
+    protected $forgiven;
+
+    /**
      * @param int $amountDue
      * @return $this
      */
@@ -610,5 +616,23 @@ class InvoiceResponse
     public function getTotal()
     {
         return $this->total;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getForgiven()
+    {
+        return $this->forgiven;
+    }
+
+    /**
+     * @param boolean $forgiven
+     * @return $this
+     */
+    public function setForgiven($forgiven)
+    {
+        $this->forgiven = $forgiven;
+        return $this;
     }
 }

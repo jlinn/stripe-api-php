@@ -22,6 +22,7 @@ use Stripe\Api\InvoiceItems;
 use Stripe\Api\Invoices;
 use Stripe\Api\Plans;
 use Stripe\Api\Recipients;
+use Stripe\Api\Refunds;
 use Stripe\Api\Subscriptions;
 use Stripe\Api\Tokens;
 use Stripe\Api\Transfers;
@@ -44,6 +45,7 @@ use Stripe\Api\Transfers;
  * @property Api\Invoices $invoices
  * @property Api\Plans $plans
  * @property Api\Recipients $recipients
+ * @property Api\Refunds $refunds
  * @property Api\Subscriptions $subscriptions
  * @property Api\Tokens $tokens
  */
@@ -79,8 +81,8 @@ class Stripe
     {
         $allowed = array(
             'accounts', 'applicationFees', 'balance', 'cards', 'charges', 'coupons', 'customers', 'discounts',
-            'disputes', 'events', 'invoiceItems', 'invoices', 'plans', 'recipients', 'subscriptions', 'tokens',
-            'transfers'
+            'disputes', 'events', 'invoiceItems', 'invoices', 'plans', 'recipients', 'refunds', 'subscriptions',
+            'tokens', 'transfers'
         );
 
         if (in_array($name, $allowed)) {
@@ -205,6 +207,14 @@ class Stripe
     public function recipients()
     {
         return $this->getApi('Recipients');
+    }
+
+    /**
+     * @return Refunds
+     */
+    public function refunds()
+    {
+        return $this->getApi('Refunds');
     }
 
     /**

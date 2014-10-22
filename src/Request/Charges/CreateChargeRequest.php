@@ -28,7 +28,7 @@ class CreateChargeRequest
     protected $customer;
 
     /**
-     * @var CreateCardRequest
+     * @var CreateCardRequest|string
      */
     protected $card;
 
@@ -121,7 +121,7 @@ class CreateChargeRequest
     }
 
     /**
-     * @return CreateCardRequest
+     * @return CreateCardRequest|string
      */
     public function getCard()
     {
@@ -129,10 +129,10 @@ class CreateChargeRequest
     }
 
     /**
-     * @param CreateCardRequest $card
+     * @param CreateCardRequest|string $card
      * @return $this
      */
-    public function setCard(CreateCardRequest $card)
+    public function setCard($card)
     {
         $this->card = $card;
         return $this;

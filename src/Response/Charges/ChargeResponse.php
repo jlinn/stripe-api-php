@@ -10,6 +10,7 @@ namespace Stripe\Response\Charges;
 use JMS\Serializer\Annotation\Type;
 use Stripe\Response\Cards\CardResponse;
 use Stripe\Response\Disputes\DisputeResponse;
+use Stripe\Response\Refunds\ListRefundsResponse;
 
 class ChargeResponse
 {
@@ -74,8 +75,8 @@ class ChargeResponse
     protected $refunded;
 
     /**
-     * @Type("array<Stripe\Response\Charges\RefundResponse>")
-     * @var RefundResponse[]
+     * @Type("Stripe\Response\Refunds\ListRefundsResponse")
+     * @var ListRefundsResponse
      */
     protected $refunds;
 
@@ -138,6 +139,12 @@ class ChargeResponse
      * @var string
      */
     protected $statementDescription;
+
+    /**
+     * @Type("string")
+     * @var string
+     */
+    protected $receiptEmail;
 
     /**
      * @return int
@@ -482,7 +489,7 @@ class ChargeResponse
     }
 
     /**
-     * @return RefundResponse[]
+     * @return ListRefundsResponse
      */
     public function getRefunds()
     {
@@ -490,7 +497,7 @@ class ChargeResponse
     }
 
     /**
-     * @param RefundResponse[] $refunds
+     * @param ListRefundsResponse $refunds
      * @return $this
      */
     public function setRefunds($refunds)
@@ -514,6 +521,24 @@ class ChargeResponse
     public function setStatementDescription($statementDescription)
     {
         $this->statementDescription = $statementDescription;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getReceiptEmail()
+    {
+        return $this->receiptEmail;
+    }
+
+    /**
+     * @param string $receiptEmail
+     * @return $this
+     */
+    public function setReceiptEmail($receiptEmail)
+    {
+        $this->receiptEmail = $receiptEmail;
         return $this;
     }
 }
