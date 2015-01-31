@@ -16,6 +16,7 @@ use Stripe\Exception\InvalidExpiryMonthException;
 use Stripe\Exception\InvalidExpiryYearException;
 use Stripe\Request\Cards\CreateCardRequest;
 use Stripe\Request\Cards\UpdateCardRequest;
+use Stripe\Request\ListRequest;
 use Stripe\Tests\StripeTestCase;
 
 class CardsTest extends StripeTestCase
@@ -126,11 +127,14 @@ class CardsTest extends StripeTestCase
 
     public function testListCards()
     {
+        $request = new ListRequest();
+        $request->setLimit(1);
         $this->cards->createCard($this->customerId, new CreateCardRequest(self::VISA_1, 1, 2020));
         $this->cards->createCard($this->customerId, new CreateCardRequest(self::MASTERCARD_1, 2, 2020));
-        $cards = $this->cards->listCards($this->customerId);
+        $cards = $this->cards->listCards($this->customerId, $request);
 
         $this->assertInstanceOf(Cards::LIST_CARDS_RESPONSE_CLASS, $cards);
+        $this->assertEquals(1, sizeof($cards->getData()));
 
         foreach ($cards->getData() as $card) {
             $this->assertInstanceOf('Stripe\Response\Cards\CardResponse', $card);

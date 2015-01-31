@@ -11,6 +11,7 @@ namespace Stripe\Tests\Api;
 use Stripe\Api\Plans;
 use Stripe\Api\Subscriptions;
 use Stripe\Request\Cards\CreateCardRequest;
+use Stripe\Request\ListRequest;
 use Stripe\Request\Plans\CreatePlanRequest;
 use Stripe\Request\Subscriptions\CreateSubscriptionRequest;
 use Stripe\Request\Subscriptions\UpdateSubscriptionRequest;
@@ -109,10 +110,14 @@ class SubscriptionsTest extends StripeTestCase
         $request->setCard(new CreateCardRequest(self::VISA_1, 1, 2020));
         $this->subscriptions->createSubscription($this->customerId, $request);
         $this->subscriptions->createSubscription($this->customerId, $request);
+        $this->subscriptions->createSubscription($this->customerId, $request);
 
-        $listResponse = $this->subscriptions->listSubscriptions($this->customerId);
+        $listRequest = new ListRequest();
+        $listRequest->setLimit(2);
+        $listResponse = $this->subscriptions->listSubscriptions($this->customerId, $listRequest);
 
         $this->assertInstanceOf(Subscriptions::LIST_SUBSCRIPTIONS_RESPONSE_CLASS, $listResponse);
+        $this->assertEquals(2, sizeof($listResponse->getData()));
         foreach ($listResponse->getData() as $data) {
             $this->assertInstanceOf(Subscriptions::SUBSCRIPTION_RESPONSE_CLASS, $data);
         }

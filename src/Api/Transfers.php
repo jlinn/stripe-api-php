@@ -9,6 +9,7 @@ namespace Stripe\Api;
 
 
 use Stripe\Request\Transfers\CreateTransferRequest;
+use Stripe\Request\Transfers\ListTransfersRequest;
 use Stripe\Response\Transfers\ListTransfersResponse;
 use Stripe\Response\Transfers\TransferResponse;
 
@@ -67,36 +68,13 @@ class Transfers extends AbstractApi
     }
 
     /**
-     * @param int $limit
-     * @param string $startingAfter
-     * @param string|array $created
-     * @param string|array $date
-     * @param string $recipient
-     * @param string $status
+     * @param ListTransfersRequest $request
      * @return ListTransfersResponse
      * @link https://stripe.com/docs/api#list_transfers
      */
-    public function listTransfers($limit = 10, $startingAfter = null, $created = null, $date = null, $recipient = null, $status = null)
+    public function listTransfers(ListTransfersRequest $request = null)
     {
-        $request = array(
-            'limit' => $limit
-        );
-        if (!is_null($startingAfter)) {
-            $request['starting_after'] = $startingAfter;
-        }
-        if (!is_null($created)) {
-            $request['created'] = $created;
-        }
-        if (!is_null($date)) {
-            $request['date'] = $date;
-        }
-        if (!is_null($recipient)) {
-            $request['recipient'] = $recipient;
-        }
-        if (!is_null($status)) {
-            $request['status'] = $status;
-        }
-        return $this->client->get($this->buildUrl(), self::LIST_TRANSFERS_RESPONSE_CLASS, null, $request);
+        return $this->client->get($this->buildUrl(), self::LIST_TRANSFERS_RESPONSE_CLASS, null, $this->listRequestToParams($request));
     }
 
     /**

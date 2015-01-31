@@ -10,6 +10,7 @@ namespace Stripe\Tests\Api;
 
 use Stripe\Api\Customers;
 use Stripe\Api\InvoiceItems;
+use Stripe\Request\InvoiceItems\ListInvoiceItemsRequest;
 use Stripe\Tests\StripeTestCase;
 
 class InvoiceItemsTest extends StripeTestCase
@@ -99,12 +100,15 @@ class InvoiceItemsTest extends StripeTestCase
 
         $this->assertInstanceOf(InvoiceItems::INVOICE_ITEM_RESPONSE_CLASS, $createResponse);
 
-        $listResponse = $this->invoiceItems->listInvoiceItems();
+        $request = new ListInvoiceItemsRequest();
+        $request->setCustomer($this->customerId);
+        $listResponse = $this->invoiceItems->listInvoiceItems($request);
 
         $this->assertInstanceOf(InvoiceItems::LIST_INVOICE_ITEMS_RESPONSE_CLASS, $listResponse);
         $itemFound = false;
         foreach ($listResponse->getData() as $invoiceItem) {
             $this->assertInstanceOf(InvoiceItems::INVOICE_ITEM_RESPONSE_CLASS, $invoiceItem);
+            $this->assertEquals($this->customerId, $invoiceItem->getCustomer());
             if ($invoiceItem->getId() == $createResponse->getId()) {
                 $itemFound = true;
             }

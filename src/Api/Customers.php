@@ -8,6 +8,7 @@
 namespace Stripe\Api;
 
 
+use Stripe\Request\ListRequest;
 use Stripe\Request\Customers\CreateCustomerRequest;
 use Stripe\Request\Customers\UpdateCustomerRequest;
 use Stripe\Response\Customers\CustomerResponse;
@@ -61,22 +62,13 @@ class Customers extends AbstractApi
     }
 
     /**
-     * @param int $count
-     * @param int $offset
-     * @param string|array $created
+     * @param ListRequest $request
      * @return ListCustomersResponse
      * @link https://stripe.com/docs/api/curl#list_customers
      */
-    public function listCustomers($count = 10, $offset = 0, $created = null)
+    public function listCustomers(ListRequest $request = null)
     {
-        $params = array(
-            'count' => $count,
-            'offset' => $offset
-        );
-        if (!is_null($created)) {
-            $params['created'] = $created;
-        }
-        return $this->client->get('customers', self::LIST_CUSTOMERS_RESPONSE_CLASS, null, $params);
+        return $this->client->get('customers', self::LIST_CUSTOMERS_RESPONSE_CLASS, null, $this->listRequestToParams($request));
     }
 
     /**

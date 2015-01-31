@@ -8,6 +8,7 @@
 namespace Stripe\Api;
 
 
+use Stripe\Request\ListRequest;
 use Stripe\Request\Plans\CreatePlanRequest;
 use Stripe\Response\DeleteResponse;
 use Stripe\Response\Plans\ListPlansResponse;
@@ -16,6 +17,7 @@ use Stripe\Response\Plans\PlanResponse;
 class Plans extends AbstractApi
 {
     const PLAN_RESPONSE_CLASS = 'Stripe\Response\Plans\PlanResponse';
+    const LIST_PLANS_RESPONSE_CLASS = 'Stripe\Response\Plans\ListPlansResponse';
 
     /**
      * @param CreatePlanRequest $request
@@ -67,14 +69,13 @@ class Plans extends AbstractApi
     }
 
     /**
-     * @param int $count
-     * @param int $offset
+     * @param ListRequest $request
      * @return ListPlansResponse
      * @link https://stripe.com/docs/api/curl#list_plans
      */
-    public function listPlans($count = 10, $offset = 0)
+    public function listPlans(ListRequest $request = null)
     {
-        return $this->client->get('plans', 'Stripe\Response\Plans\ListPlansResponse', null, array('count' => $count, 'offset' => $offset));
+        return $this->client->get('plans', self::LIST_PLANS_RESPONSE_CLASS, null, $this->listRequestToParams($request));
     }
 
     /**

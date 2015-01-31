@@ -9,6 +9,7 @@ namespace Stripe\Api;
 
 
 use Stripe\Request\Charges\CreateChargeRequest;
+use Stripe\Request\ListRequest;
 use Stripe\Response\Charges\ChargeResponse;
 use Stripe\Response\Charges\ListChargesResponse;
 
@@ -95,26 +96,13 @@ class Charges extends AbstractApi
     }
 
     /**
-     * @param int $count
-     * @param int $offset
-     * @param string|array $created
-     * @param string $customerId
+     * @param ListRequest $request
      * @return ListChargesResponse
      * @link https://stripe.com/docs/api#list_charges
      */
-    public function listCharges($count = 10, $offset = 0, $created = null, $customerId = null)
+    public function listCharges(ListRequest $request = null)
     {
-        $request = array(
-            'count' => $count,
-            'offset' => $offset
-        );
-        if (!is_null($created)) {
-            $request['created'] = $created;
-        }
-        if (!is_null($customerId)) {
-            $request['customer'] = $customerId;
-        }
-        return $this->client->get($this->buildUrl(), self::LIST_CHARGES_RESPONSE_CLASS, null, $request);
+        return $this->client->get($this->buildUrl(), self::LIST_CHARGES_RESPONSE_CLASS, null, $this->listRequestToParams($request));
     }
 
     /**

@@ -10,6 +10,7 @@ namespace Stripe\Tests\Api;
 
 use Stripe\Api\Balance;
 use Stripe\Api\Transfers;
+use Stripe\Request\Balance\ListBalanceHistoryRequest;
 use Stripe\Tests\StripeTestCase;
 
 class BalanceTest extends StripeTestCase
@@ -52,9 +53,12 @@ class BalanceTest extends StripeTestCase
 
     public function testListBalanceHistory()
     {
-        $history = $this->balance->listBalanceHistory();
+        $request = new ListBalanceHistoryRequest();
+        $request->setLimit(1);
+        $history = $this->balance->listBalanceHistory($request);
 
         $this->assertInstanceOf(Balance::LIST_BALANCE_TRANSACTIONS_RESPONSE_CLASS, $history);
+        $this->assertEquals(1, sizeof($history->getData()));
     }
 }
  

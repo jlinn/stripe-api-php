@@ -8,6 +8,7 @@
 
 namespace Stripe;
 
+use Doctrine\Common\Annotations\AnnotationRegistry;
 use Stripe\Api\AbstractApi;
 use Stripe\Api\Accounts;
 use Stripe\Api\ApplicationFees;
@@ -66,7 +67,7 @@ class Stripe
      */
     public function __construct($apiKey)
     {
-        \Doctrine\Common\Annotations\AnnotationRegistry::registerLoader('class_exists');
+        AnnotationRegistry::registerLoader('class_exists');
         $this->client = new Client($apiKey);
     }
 

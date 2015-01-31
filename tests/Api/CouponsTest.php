@@ -9,6 +9,7 @@ namespace Stripe\Tests\Api;
 
 
 use Stripe\Api\Coupons;
+use Stripe\Request\ListRequest;
 use Stripe\Response\Coupons\CouponResponse;
 use Stripe\Tests\StripeTestCase;
 
@@ -66,9 +67,12 @@ class CouponsTest extends StripeTestCase
 
     public function testListCoupons()
     {
-        $listResponse = $this->coupons->listCoupons();
+        $request = new ListRequest();
+        $request->setLimit(1);
+        $listResponse = $this->coupons->listCoupons($request);
 
         $this->assertInstanceOf(Coupons::LIST_COUPONS_RESPONSE_CLASS, $listResponse);
+        $this->assertEquals(1, sizeof($listResponse->getData()));
     }
 
     /**

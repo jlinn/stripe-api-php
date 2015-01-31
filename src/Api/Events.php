@@ -8,6 +8,7 @@
 namespace Stripe\Api;
 
 
+use Stripe\Request\Events\ListEventsRequest;
 use Stripe\Response\Events\EventResponse;
 use Stripe\Response\Events\ListEventsResponse;
 
@@ -27,26 +28,13 @@ class Events extends AbstractApi
     }
 
     /**
-     * @param string|array $created
-     * @param string $type
-     * @param int $limit
-     * @param string $startingAfter
+     * @param ListEventsRequest $request
      * @return ListEventsResponse
      * @link https://stripe.com/docs/api#list_events
      */
-    public function listEvents($created = null, $type = null, $limit = 10, $startingAfter = null)
+    public function listEvents(ListEventsRequest $request = null)
     {
-        $request = array('limit' => $limit);
-        if (!is_null($created)) {
-            $request['created'] = $created;
-        }
-        if (!is_null($type)) {
-            $request['type'] = $type;
-        }
-        if (!is_null($startingAfter)) {
-            $request['starting_after'] = $startingAfter;
-        }
-        return $this->client->get($this->buildUrl(), self::LIST_EVENTS_RESPONSE_CLASS, null, $request);
+        return $this->client->get($this->buildUrl(), self::LIST_EVENTS_RESPONSE_CLASS, null, $this->listRequestToParams($request));
     }
 
     /**

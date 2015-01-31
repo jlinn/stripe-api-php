@@ -10,6 +10,7 @@ namespace Stripe\Api;
 use JMS\Serializer\Serializer;
 use JMS\Serializer\SerializerBuilder;
 use Stripe\Client;
+use Stripe\Request\ListRequest;
 
 abstract class AbstractApi
 {
@@ -32,5 +33,18 @@ abstract class AbstractApi
     {
         $this->client = $client;
         $this->serializer = SerializerBuilder::create()->build();
+    }
+
+    /**
+     * Convenience method to perform a null check on the optional list request parameter
+     * @param ListRequest $request
+     * @return array
+     */
+    protected function listRequestToParams(ListRequest $request = null)
+    {
+        if (!is_null($request)) {
+            return $request->toParams();
+        }
+        return array();
     }
 } 

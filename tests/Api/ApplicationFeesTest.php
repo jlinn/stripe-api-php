@@ -9,6 +9,7 @@ namespace Stripe\Tests\Api;
 
 
 use Stripe\Api\ApplicationFees;
+use Stripe\Request\ApplicationFees\ListApplicationFeesRequest;
 use Stripe\Tests\StripeTestCase;
 
 class ApplicationFeesTest extends StripeTestCase
@@ -28,7 +29,9 @@ class ApplicationFeesTest extends StripeTestCase
 
     public function testListApplicationFees()
     {
-        $list = $this->applicationFees->listApplicationFees();
+        $request = new ListApplicationFeesRequest();
+        $request->setLimit(1);
+        $list = $this->applicationFees->listApplicationFees($request);
 
         $this->assertInstanceOf(ApplicationFees::LIST_APPLICATION_FEES_RESPONSE_CLASS, $list);
     }

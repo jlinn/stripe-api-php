@@ -9,6 +9,7 @@ namespace Stripe\Tests\Api;
 
 
 use Stripe\Api\Events;
+use Stripe\Request\Events\ListEventsRequest;
 use Stripe\Tests\StripeTestCase;
 
 class EventsTest extends StripeTestCase
@@ -26,9 +27,12 @@ class EventsTest extends StripeTestCase
 
     public function testListEvents()
     {
-        $list = $this->events->listEvents();
+        $request = new ListEventsRequest();
+        $request->setLimit(1);
+        $list = $this->events->listEvents($request);
 
         $this->assertInstanceOf(Events::LIST_EVENTS_RESPONSE_CLASS, $list);
+        $this->assertEquals(1, sizeof($list->getData()));
 
         foreach ($list->getData() as $event) {
             $this->assertInstanceOf(Events::EVENT_RESPONSE_CLASS, $event);

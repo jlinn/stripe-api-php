@@ -9,6 +9,7 @@ namespace Stripe\Api;
 
 
 use Stripe\Request\InvoiceItems\CreateInvoiceItemRequest;
+use Stripe\Request\InvoiceItems\ListInvoiceItemsRequest;
 use Stripe\Response\DeleteResponse;
 use Stripe\Response\InvoiceItems\InvoiceItemResponse;
 use Stripe\Response\InvoiceItems\ListInvoiceItemsResponse;
@@ -72,30 +73,13 @@ class InvoiceItems extends AbstractApi
     }
 
     /**
-     * @param int $count
-     * @param int $offset
-     * @param string|array $created
-     * @param string $customerId
-     * @param string $startingAfter
+     * @param ListInvoiceItemsRequest $request
      * @return ListInvoiceItemsResponse
      * @link https://stripe.com/docs/api#list_invoiceitems
      */
-    public function listInvoiceItems($count = 10, $offset = 0, $created = null, $customerId = null, $startingAfter = null)
+    public function listInvoiceItems(ListInvoiceItemsRequest $request = null)
     {
-        $request = array(
-            'count' => $count,
-            'offset' => $offset
-        );
-        if (!is_null($created)) {
-            $request['created'] = $created;
-        }
-        if (!is_null($customerId)) {
-            $request['customer'] = $customerId;
-        }
-        if (!is_null($startingAfter)) {
-            $request['starting_after'] = $startingAfter;
-        }
-        return $this->client->get($this->buildUrl(), self::LIST_INVOICE_ITEMS_RESPONSE_CLASS, null, $request);
+        return $this->client->get($this->buildUrl(), self::LIST_INVOICE_ITEMS_RESPONSE_CLASS, null, $this->listRequestToParams($request));
     }
 
     /**

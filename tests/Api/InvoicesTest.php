@@ -11,6 +11,7 @@ namespace Stripe\Tests\Api;
 use Stripe\Api\Customers;
 use Stripe\Api\Invoices;
 use Stripe\Request\Cards\CreateCardRequest;
+use Stripe\Request\ListRequest;
 use Stripe\Tests\StripeTestCase;
 
 class InvoicesTest extends StripeTestCase
@@ -98,8 +99,12 @@ class InvoicesTest extends StripeTestCase
 
     public function testListInvoices()
     {
-        $invoices = $this->invoices->listInvoices();
+        $request = new ListRequest();
+        $request->setLimit(1);
+        $invoices = $this->invoices->listInvoices($request);
+
         $this->assertInstanceOf('Stripe\\Response\\Invoices\\ListInvoicesResponse', $invoices);
+        $this->assertEquals(1, sizeof($invoices->getData()));
     }
 
     public function testListInvoiceLineItems()

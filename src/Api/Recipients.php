@@ -9,6 +9,7 @@ namespace Stripe\Api;
 
 
 use Stripe\Request\Recipients\CreateRecipientRequest;
+use Stripe\Request\Recipients\ListRecipientsRequest;
 use Stripe\Request\Recipients\UpdateRecipientRequest;
 use Stripe\Response\DeleteResponse;
 use Stripe\Response\Recipients\ListRecipientsResponse;
@@ -61,24 +62,13 @@ class Recipients extends AbstractApi
     }
 
     /**
-     * @param int $limit
-     * @param string $startingAfter
-     * @param bool $verified
+     * @param ListRecipientsRequest $request
      * @return ListRecipientsResponse
      * @link https://stripe.com/docs/api#list_recipients
      */
-    public function listRecipients($limit = 10, $startingAfter = null, $verified = null)
+    public function listRecipients(ListRecipientsRequest $request = null)
     {
-        $request = array(
-            'limit' => $limit
-        );
-        if (!is_null($startingAfter)) {
-            $request['starting_after'] = $startingAfter;
-        }
-        if (!is_null($verified)) {
-            $request['verified'] = $verified;
-        }
-        return $this->client->get($this->buildUrl(), self::LIST_RECIPIENTS_RESPONSE_CLASS, null, $request);
+        return $this->client->get($this->buildUrl(), self::LIST_RECIPIENTS_RESPONSE_CLASS, null, $this->listRequestToParams($request));
     }
 
     /**

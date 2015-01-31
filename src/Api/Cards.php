@@ -15,6 +15,7 @@ use Stripe\Exception\InvalidExpiryMonthException;
 use Stripe\Exception\InvalidExpiryYearException;
 use Stripe\Request\Cards\CreateCardRequest;
 use Stripe\Request\Cards\UpdateCardRequest;
+use Stripe\Request\ListRequest;
 use Stripe\Response\Cards\CardResponse;
 use Stripe\Response\Cards\ListCardsResponse;
 use Stripe\Response\DeleteResponse;
@@ -101,14 +102,13 @@ class Cards extends AbstractApi
 
     /**
      * @param string $customerId
-     * @param int $count
-     * @param int $offset
+     * @param ListRequest $request
      * @return ListCardsResponse
      * @link https://stripe.com/docs/api/curl#list_cards
      */
-    public function listCards($customerId, $count = 10, $offset = 0)
+    public function listCards($customerId, ListRequest $request = null)
     {
-        return $this->client->get($this->buildUrl($customerId), self::LIST_CARDS_RESPONSE_CLASS, null, array('count' => $count, 'offset' => $offset));
+        return $this->client->get($this->buildUrl($customerId), self::LIST_CARDS_RESPONSE_CLASS, null, $this->listRequestToParams($request));
     }
 
     /**

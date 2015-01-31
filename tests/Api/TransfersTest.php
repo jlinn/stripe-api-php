@@ -9,6 +9,7 @@ namespace Stripe\Tests\Api;
 
 
 use Stripe\Api\Transfers;
+use Stripe\Request\Transfers\ListTransfersRequest;
 use Stripe\Response\Transfers\TransferResponse;
 use Stripe\Tests\StripeTestCase;
 
@@ -71,9 +72,12 @@ class TransfersTest extends StripeTestCase
 
     public function testListTransfers()
     {
-        $listResponse = $this->transfers->listTransfers();
+        $request = new ListTransfersRequest();
+        $request->setLimit(1);
+        $listResponse = $this->transfers->listTransfers($request);
 
         $this->assertInstanceOf(Transfers::LIST_TRANSFERS_RESPONSE_CLASS, $listResponse);
+        $this->assertEquals(1, sizeof($listResponse->getData()));
     }
 
     /**

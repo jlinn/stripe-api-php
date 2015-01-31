@@ -8,6 +8,7 @@
 namespace Stripe\Tests\Api;
 
 
+use Stripe\Request\ListRequest;
 use Stripe\Api\Customers;
 use Stripe\Request\Customers\CreateCustomerRequest;
 use Stripe\Request\Customers\UpdateCustomerRequest;
@@ -83,10 +84,15 @@ class CustomersTest extends StripeTestCase
     {
         $customer1 = $this->customers->createCustomer();
         $customer2 = $this->customers->createCustomer();
+        $this->customers->createCustomer();
+        $this->customers->createCustomer();
 
-        $list = $this->customers->listCustomers();
+        $request = new ListRequest();
+        $request->setLimit(2);
+        $list = $this->customers->listCustomers($request);
 
         $this->assertInstanceOf(Customers::LIST_CUSTOMERS_RESPONSE_CLASS, $list);
+        $this->assertEquals(2, sizeof($list->getData()));
 
         $this->customers->deleteCustomer($customer1->getId());
         $this->customers->deleteCustomer($customer2->getId());

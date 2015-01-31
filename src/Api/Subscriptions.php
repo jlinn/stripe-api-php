@@ -8,6 +8,7 @@
 namespace Stripe\Api;
 
 
+use Stripe\Request\ListRequest;
 use Stripe\Request\Subscriptions\CreateSubscriptionRequest;
 use Stripe\Request\Subscriptions\UpdateSubscriptionRequest;
 use Stripe\Response\Subscriptions\ListSubscriptionsResponse;
@@ -66,14 +67,13 @@ class Subscriptions extends AbstractApi
 
     /**
      * @param string $customerId
-     * @param int $count
-     * @param int $offset
+     * @param ListRequest $request
      * @return ListSubscriptionsResponse
      * @link https://stripe.com/docs/api/curl#list_subscriptions
      */
-    public function listSubscriptions($customerId, $count = 10, $offset = 0)
+    public function listSubscriptions($customerId, ListRequest $request = null)
     {
-        return $this->client->get($this->buildUrl($customerId), self::LIST_SUBSCRIPTIONS_RESPONSE_CLASS, null, array('count' => $count, 'offset' => $offset));
+        return $this->client->get($this->buildUrl($customerId), self::LIST_SUBSCRIPTIONS_RESPONSE_CLASS, null, $this->listRequestToParams($request));
     }
 
     /**

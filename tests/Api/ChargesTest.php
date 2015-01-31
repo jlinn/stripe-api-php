@@ -12,6 +12,7 @@ use Stripe\Api\Charges;
 use Stripe\Api\Tokens;
 use Stripe\Request\Cards\CreateCardRequest;
 use Stripe\Request\Charges\CreateChargeRequest;
+use Stripe\Request\ListRequest;
 use Stripe\Request\Tokens\CreateCardTokenRequest;
 use Stripe\Tests\StripeTestCase;
 
@@ -113,9 +114,12 @@ class ChargesTest extends StripeTestCase
 
     public function testListCharges()
     {
-        $listResponse = $this->charges->listCharges();
+        $request = new ListRequest();
+        $request->setLimit(1);
+        $listResponse = $this->charges->listCharges($request);
 
         $this->assertInstanceOf(Charges::LIST_CHARGES_RESPONSE_CLASS, $listResponse);
+        $this->assertEquals(1, sizeof($listResponse->getData()));
         foreach ($listResponse->getData() as $charge) {
             $this->assertInstanceOf(Charges::CHARGE_RESPONSE_CLASS, $charge);
         }

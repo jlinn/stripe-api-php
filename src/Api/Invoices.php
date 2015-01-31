@@ -9,6 +9,7 @@ namespace Stripe\Api;
 
 
 use Stripe\Request\Invoices\CreateInvoiceRequest;
+use Stripe\Request\ListRequest;
 use Stripe\Response\Invoices\InvoiceResponse;
 use Stripe\Response\Invoices\ListInvoicesResponse;
 use Stripe\Response\Invoices\ListLineItemsResponse;
@@ -75,14 +76,13 @@ class Invoices extends AbstractApi
     }
 
     /**
-     * @param int $count
-     * @param int $offset
+     * @param ListRequest $request
      * @return ListInvoicesResponse
      * @link https://stripe.com/docs/api/curl#list_plans
      */
-    public function listInvoices($count = 10, $offset = 0)
+    public function listInvoices(ListRequest $request = null)
     {
-        return $this->client->get('invoices', 'Stripe\Response\Invoices\ListInvoicesResponse', null, array('count' => $count, 'offset' => $offset));
+        return $this->client->get('invoices', 'Stripe\Response\Invoices\ListInvoicesResponse', null, $this->listRequestToParams($request));
     }
 
     /**

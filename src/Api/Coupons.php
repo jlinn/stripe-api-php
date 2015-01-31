@@ -9,6 +9,7 @@ namespace Stripe\Api;
 
 
 use Stripe\Request\Coupons\CreateCouponRequest;
+use Stripe\Request\ListRequest;
 use Stripe\Response\Coupons\CouponResponse;
 use Stripe\Response\Coupons\ListCouponsResponse;
 use Stripe\Response\DeleteResponse;
@@ -49,20 +50,13 @@ class Coupons extends AbstractApi
     }
 
     /**
-     * @param int $limit
-     * @param string $startingAfter
+     * @param ListRequest $request
      * @return ListCouponsResponse
      * @link https://stripe.com/docs/api#list_coupons
      */
-    public function listCoupons($limit = 10, $startingAfter = null)
+    public function listCoupons(ListRequest $request = null)
     {
-        $request = array(
-            'limit' => $limit
-        );
-        if (!is_null($startingAfter)) {
-            $request['starting_after'] = $startingAfter;
-        }
-        return $this->client->get($this->buildUrl(), self::LIST_COUPONS_RESPONSE_CLASS, null, $request);
+        return $this->client->get($this->buildUrl(), self::LIST_COUPONS_RESPONSE_CLASS, null, $this->listRequestToParams($request));
     }
 
     /**

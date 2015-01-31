@@ -45,7 +45,7 @@ class Balance extends AbstractApi
      */
     public function listBalanceHistory(ListBalanceHistoryRequest $request = null)
     {
-        return $this->client->get('balance/history', self::LIST_BALANCE_TRANSACTIONS_RESPONSE_CLASS, $request);
+        return $this->client->get('balance/history', self::LIST_BALANCE_TRANSACTIONS_RESPONSE_CLASS, null, $this->listRequestToParams($request));
     }
 
     /**

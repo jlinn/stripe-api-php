@@ -8,17 +8,14 @@
 namespace Stripe\Request\Balance;
 
 
-class ListBalanceHistoryRequest
+use Stripe\Request\ListRequest;
+
+class ListBalanceHistoryRequest extends ListRequest
 {
     /**
-     * @var string|array
+     * @var string|AvailableOn
      */
     protected $availableOn;
-
-    /**
-     * @var string|array
-     */
-    protected $created;
 
     /**
      * @var string
@@ -26,19 +23,9 @@ class ListBalanceHistoryRequest
     protected $currency;
 
     /**
-     * @var int
-     */
-    protected $limit;
-
-    /**
      * @var string
      */
     protected $source;
-
-    /**
-     * @var string
-     */
-    protected $startingAfter;
 
     /**
      * @var string
@@ -51,7 +38,7 @@ class ListBalanceHistoryRequest
     protected $type;
 
     /**
-     * @return array|string
+     * @return AvailableOn|string
      */
     public function getAvailableOn()
     {
@@ -59,30 +46,12 @@ class ListBalanceHistoryRequest
     }
 
     /**
-     * @param array|string $availableOn
+     * @param AvailableOn|string $availableOn
      * @return $this
      */
     public function setAvailableOn($availableOn)
     {
         $this->availableOn = $availableOn;
-        return $this;
-    }
-
-    /**
-     * @return array|string
-     */
-    public function getCreated()
-    {
-        return $this->created;
-    }
-
-    /**
-     * @param array|string $created
-     * @return $this
-     */
-    public function setCreated($created)
-    {
-        $this->created = $created;
         return $this;
     }
 
@@ -105,24 +74,6 @@ class ListBalanceHistoryRequest
     }
 
     /**
-     * @return int
-     */
-    public function getLimit()
-    {
-        return $this->limit;
-    }
-
-    /**
-     * @param int $limit
-     * @return $this
-     */
-    public function setLimit($limit)
-    {
-        $this->limit = $limit;
-        return $this;
-    }
-
-    /**
      * @return string
      */
     public function getSource()
@@ -137,24 +88,6 @@ class ListBalanceHistoryRequest
     public function setSource($source)
     {
         $this->source = $source;
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getStartingAfter()
-    {
-        return $this->startingAfter;
-    }
-
-    /**
-     * @param string $startingAfter
-     * @return $this
-     */
-    public function setStartingAfter($startingAfter)
-    {
-        $this->startingAfter = $startingAfter;
         return $this;
     }
 
@@ -192,5 +125,33 @@ class ListBalanceHistoryRequest
     {
         $this->type = $type;
         return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function toParams()
+    {
+        $params = parent::toParams();
+        if (!is_null($this->availableOn)) {
+            if ($this->availableOn instanceof AvailableOn) {
+                $params = array_merge($params, $this->availableOn->toParams());
+            } else {
+                $params["available_on"] = $this->availableOn;
+            }
+        }
+        if (!is_null($this->currency)) {
+            $params["currency"] = $this->currency;
+        }
+        if (!is_null($this->source)) {
+            $params["source"] = $this->source;
+        }
+        if (!is_null($this->transfer)) {
+            $params["transfer"] = $this->transfer;
+        }
+        if (!is_null($this->type)) {
+            $params["type"] = $this->type;
+        }
+        return $params;
     }
 }

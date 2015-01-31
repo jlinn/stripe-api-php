@@ -9,6 +9,7 @@ namespace Stripe\Tests\Api;
 
 
 use Stripe\Api\Plans;
+use Stripe\Request\ListRequest;
 use Stripe\Request\Plans\CreatePlanRequest;
 use Stripe\Tests\StripeTestCase;
 
@@ -66,6 +67,20 @@ class PlansTest extends StripeTestCase
 
         $this->assertInstanceOf(Plans::DELETE_RESPONSE_CLASS, $deleteResponse);
         $this->assertTrue($deleteResponse->getDeleted());
+    }
+
+    public function testListPlans()
+    {
+        $this->createPlan();
+        $this->createPlan();
+        $this->createPlan();
+
+        $request = new ListRequest();
+        $request->setLimit(2);
+        $plans = $this->plans->listPlans($request);
+
+        $this->assertInstanceOf(Plans::LIST_PLANS_RESPONSE_CLASS, $plans);
+        $this->assertEquals(2, sizeof($plans->getData()));
     }
 
     /**
