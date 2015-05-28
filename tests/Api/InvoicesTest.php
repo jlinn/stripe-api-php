@@ -76,13 +76,14 @@ class InvoicesTest extends StripeTestCase
         $request = $this->invoices->createInvoiceRequest($this->customerId);
         $invoice = $this->invoices->createInvoice($request);
 
-        $updatedInvoice = $this->invoices->updateInvoice($invoice->getId(), null, false, 'Updated Description', array('updated' => 'metadata'));
+        $updatedInvoice = $this->invoices->updateInvoice($invoice->getId(), null, false, 'Updated Description', array('updated' => 'metadata'), 0.2);
         $this->assertInstanceOf(Invoices::INVOICE_RESPONSE_CLASS, $updatedInvoice);
 
         $this->assertEquals(null, $updatedInvoice->getApplicationFee());
         $this->assertEquals(false, $updatedInvoice->getClosed());
         $this->assertEquals('Updated Description', $updatedInvoice->getDescription());
         $this->assertEquals(array('updated' => 'metadata'), $updatedInvoice->getMetadata());
+        $this->assertEquals(0.2, $updatedInvoice->getTaxPercent());
     }
 
     public function testPayInvoice()

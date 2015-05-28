@@ -59,7 +59,7 @@ class SubscriptionsTest extends StripeTestCase
     public function testCreateSubscription()
     {
         $request = new CreateSubscriptionRequest($this->planId);
-        $request->setCard(new CreateCardRequest(self::VISA_1, 1, 2020));
+        $request->setCard(new CreateCardRequest(self::VISA_1, 1, 2020, 123));
         $response = $this->subscriptions->createSubscription($this->customerId, $request);
 
         $this->assertInstanceOf(Subscriptions::SUBSCRIPTION_RESPONSE_CLASS, $response);
@@ -69,7 +69,7 @@ class SubscriptionsTest extends StripeTestCase
     public function testGetSubscription()
     {
         $request = new CreateSubscriptionRequest($this->planId);
-        $request->setCard(new CreateCardRequest(self::VISA_1, 1, 2020));
+        $request->setCard(new CreateCardRequest(self::VISA_1, 1, 2020, 123));
         $createResponse = $this->subscriptions->createSubscription($this->customerId, $request);
 
         $getResponse = $this->subscriptions->getSubscription($this->customerId, $createResponse->getId());
@@ -81,7 +81,7 @@ class SubscriptionsTest extends StripeTestCase
     public function testUpdateSubscription()
     {
         $request = new CreateSubscriptionRequest($this->planId);
-        $request->setCard(new CreateCardRequest(self::VISA_1, 1, 2020));
+        $request->setCard(new CreateCardRequest(self::VISA_1, 1, 2020, 123));
         $createResponse = $this->subscriptions->createSubscription($this->customerId, $request);
 
         $request = new UpdateSubscriptionRequest();
@@ -95,7 +95,7 @@ class SubscriptionsTest extends StripeTestCase
     public function testCancelSubscription()
     {
         $request = new CreateSubscriptionRequest($this->planId);
-        $request->setCard(new CreateCardRequest(self::VISA_1, 1, 2020));
+        $request->setCard(new CreateCardRequest(self::VISA_1, 1, 2020, 123));
         $createResponse = $this->subscriptions->createSubscription($this->customerId, $request);
 
         $cancelResponse = $this->subscriptions->cancelSubscription($this->customerId, $createResponse->getId(), true);
@@ -107,7 +107,7 @@ class SubscriptionsTest extends StripeTestCase
     public function testListSubscriptions()
     {
         $request = new CreateSubscriptionRequest($this->planId);
-        $request->setCard(new CreateCardRequest(self::VISA_1, 1, 2020));
+        $request->setCard(new CreateCardRequest(self::VISA_1, 1, 2020, 123));
         $this->subscriptions->createSubscription($this->customerId, $request);
         $this->subscriptions->createSubscription($this->customerId, $request);
         $this->subscriptions->createSubscription($this->customerId, $request);

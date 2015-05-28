@@ -36,6 +36,11 @@ class CreateInvoiceRequest
     protected $subscription;
 
     /**
+     * @var float
+     */
+    protected $taxPercent;
+
+    /**
      * @param string $customer
      */
     public function __construct($customer)
@@ -133,5 +138,22 @@ class CreateInvoiceRequest
         return $this->subscription;
     }
 
+    /**
+     * @param float $taxPercent
+     * @return $this
+     */
+    public function setTaxPercent($taxPercent)
+    {
+        $this->taxPercent = $taxPercent;
+        return $this;
+    }
+
+    /**
+     * @return float
+     */
+    public function getTaxPercent()
+    {
+        return $this->taxPercent;
+    }
 
 }

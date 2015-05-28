@@ -44,10 +44,11 @@ class Invoices extends AbstractApi
      * @param bool $closed
      * @param string $description
      * @param array $metadata
+     * @param float $taxPercent
      * @return InvoiceResponse
      * @link https://stripe.com/docs/api/curl#update_plan
      */
-    public function updateInvoice($invoiceId, $applicationFee = null, $closed = null, $description = null, $metadata = null)
+    public function updateInvoice($invoiceId, $applicationFee = null, $closed = null, $description = null, $metadata = null, $taxPercent = null)
     {
         $data = array();
         if (!is_null($applicationFee)) {
@@ -61,6 +62,9 @@ class Invoices extends AbstractApi
         }
         if (!is_null($metadata)) {
             $data['metadata'] = $metadata;
+        }
+        if (!is_null($taxPercent)) {
+            $data["tax_percent"] = $taxPercent;
         }
         return $this->client->post('invoices/' . $invoiceId, self::INVOICE_RESPONSE_CLASS, $data);
     }
