@@ -36,7 +36,7 @@ class InvoicesTest extends StripeTestCase
         parent::setUp();
         $this->invoices = new Invoices($this->client);
         $this->customers = new Customers($this->client);
-        $customerRequest = $this->customers->createCustomerRequest()->setCard(new CreateCardRequest(self::VISA_1, 1, 2020));
+        $customerRequest = $this->customers->createCustomerRequest()->setCard(new CreateCardRequest(self::VISA_1, 1, 2020, 123));
         $this->customerId = $this->customers->createCustomer($customerRequest)->getId();
     }
 

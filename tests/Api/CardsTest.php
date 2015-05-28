@@ -47,7 +47,7 @@ class CardsTest extends StripeTestCase
     public function testCreateCard()
     {
         $cardNumber = self::VISA_1;
-        $request = new CreateCardRequest($cardNumber, 1, 2020);
+        $request = new CreateCardRequest($cardNumber, 1, 2020, 123);
         $response = $this->cards->createCard($this->customerId, $request);
 
         $this->assertInstanceOf('Stripe\Response\Cards\CardResponse', $response);
@@ -56,7 +56,7 @@ class CardsTest extends StripeTestCase
         // test error handling
 
         $cardNumber = self::INCORRECT_NUMBER;
-        $request = new CreateCardRequest($cardNumber, 1, 2020);
+        $request = new CreateCardRequest($cardNumber, 1, 2020, 123);
         $exceptionThrown = false;
         try {
             $this->cards->createCard($this->customerId, $request);
@@ -66,7 +66,7 @@ class CardsTest extends StripeTestCase
         $this->assertTrue($exceptionThrown);
 
         $cardNumber = self::CARD_DECLINED;
-        $request = new CreateCardRequest($cardNumber, 1, 2020);
+        $request = new CreateCardRequest($cardNumber, 1, 2020, 123);
         $exceptionThrown = false;
         try {
             $this->cards->createCard($this->customerId, $request);
@@ -76,7 +76,7 @@ class CardsTest extends StripeTestCase
         $this->assertTrue($exceptionThrown);
 
         $cardNumber = self::VISA_1;
-        $request = new CreateCardRequest($cardNumber, 13, 2020);
+        $request = new CreateCardRequest($cardNumber, 13, 2020, 123);
         $exceptionThrown = false;
         try {
             $this->cards->createCard($this->customerId, $request);
@@ -85,7 +85,7 @@ class CardsTest extends StripeTestCase
         }
         $this->assertTrue($exceptionThrown);
 
-        $request = new CreateCardRequest($cardNumber, 12, 1984);
+        $request = new CreateCardRequest($cardNumber, 12, 1984, 123);
         $exceptionThrown = false;
         try {
             $this->cards->createCard($this->customerId, $request);
@@ -107,7 +107,7 @@ class CardsTest extends StripeTestCase
 
     public function testUpdateCard()
     {
-        $createResponse = $this->cards->createCard($this->customerId, new CreateCardRequest(self::VISA_1, 1, 2020));
+        $createResponse = $this->cards->createCard($this->customerId, new CreateCardRequest(self::VISA_1, 1, 2020, 123));
         $request = new UpdateCardRequest();
         $request->setExpYear(2021);
         $updateResponse = $this->cards->updateCard($this->customerId, $createResponse->getId(), $request);
@@ -118,7 +118,7 @@ class CardsTest extends StripeTestCase
 
     public function testGetCard()
     {
-        $createResponse = $this->cards->createCard($this->customerId, new CreateCardRequest(self::VISA_1, 1, 2020));
+        $createResponse = $this->cards->createCard($this->customerId, new CreateCardRequest(self::VISA_1, 1, 2020, 123));
         $card = $this->cards->getCard($this->customerId, $createResponse->getId());
 
         $this->assertInstanceOf('Stripe\Response\Cards\CardResponse', $card);
@@ -129,8 +129,8 @@ class CardsTest extends StripeTestCase
     {
         $request = new ListRequest();
         $request->setLimit(1);
-        $this->cards->createCard($this->customerId, new CreateCardRequest(self::VISA_1, 1, 2020));
-        $this->cards->createCard($this->customerId, new CreateCardRequest(self::MASTERCARD_1, 2, 2020));
+        $this->cards->createCard($this->customerId, new CreateCardRequest(self::VISA_1, 1, 2020, 123));
+        $this->cards->createCard($this->customerId, new CreateCardRequest(self::MASTERCARD_1, 2, 2020, 123));
         $cards = $this->cards->listCards($this->customerId, $request);
 
         $this->assertInstanceOf(Cards::LIST_CARDS_RESPONSE_CLASS, $cards);
@@ -143,7 +143,7 @@ class CardsTest extends StripeTestCase
 
     public function testDeleteCard()
     {
-        $createResponse = $this->cards->createCard($this->customerId, new CreateCardRequest(self::VISA_1, 1, 2020));
+        $createResponse = $this->cards->createCard($this->customerId, new CreateCardRequest(self::VISA_1, 1, 2020, 123));
         $deleteResponse = $this->cards->deleteCard($this->customerId, $createResponse->getId());
 
         $this->assertTrue($deleteResponse->getDeleted());

@@ -32,7 +32,7 @@ class ChargesTest extends StripeTestCase
     public function testCreateCharge()
     {
         $request = new CreateChargeRequest(350, "usd");
-        $request->setCard(new CreateCardRequest(self::VISA_1, 1, 2020));
+        $request->setCard(new CreateCardRequest(self::VISA_1, 1, 2020, 123));
         $response = $this->charges->createCharge($request);
 
         $this->assertInstanceOf(Charges::CHARGE_RESPONSE_CLASS, $response);
@@ -41,7 +41,7 @@ class ChargesTest extends StripeTestCase
     public function testCreateChargeWithToken(){
         // create a token
         $tokens = new Tokens($this->client);
-        $tokenResponse = $tokens->createCardToken(new CreateCardTokenRequest(self::VISA_1, 1, 2020));
+        $tokenResponse = $tokens->createCardToken(new CreateCardTokenRequest(self::VISA_1, 1, 2020, 123));
 
         $request = new CreateChargeRequest(350, "usd");
         $request->setCard($tokenResponse->getId());
@@ -53,7 +53,7 @@ class ChargesTest extends StripeTestCase
     public function testGetCharge()
     {
         $createRequest = new CreateChargeRequest(350, "usd");
-        $createRequest->setCard(new CreateCardRequest(self::VISA_1, 1, 2020));
+        $createRequest->setCard(new CreateCardRequest(self::VISA_1, 1, 2020, 123));
         $createResponse = $this->charges->createCharge($createRequest);
 
         $this->assertInstanceOf(Charges::CHARGE_RESPONSE_CLASS, $createResponse);
@@ -68,7 +68,7 @@ class ChargesTest extends StripeTestCase
     public function testUpdateCharge()
     {
         $createRequest = new CreateChargeRequest(350, "usd");
-        $createRequest->setCard(new CreateCardRequest(self::VISA_1, 1, 2020));
+        $createRequest->setCard(new CreateCardRequest(self::VISA_1, 1, 2020, 123));
         $createResponse = $this->charges->createCharge($createRequest);
 
         $this->assertInstanceOf(Charges::CHARGE_RESPONSE_CLASS, $createResponse);
@@ -85,7 +85,7 @@ class ChargesTest extends StripeTestCase
     public function testRefundCharge()
     {
         $createRequest = new CreateChargeRequest(350, "usd");
-        $createRequest->setCard(new CreateCardRequest(self::VISA_1, 1, 2020));
+        $createRequest->setCard(new CreateCardRequest(self::VISA_1, 1, 2020, 123));
         $createResponse = $this->charges->createCharge($createRequest);
 
         $this->assertInstanceOf(Charges::CHARGE_RESPONSE_CLASS, $createResponse);
@@ -99,7 +99,7 @@ class ChargesTest extends StripeTestCase
     public function testCaptureCharge()
     {
         $createRequest = new CreateChargeRequest(350, "usd");
-        $createRequest->setCard(new CreateCardRequest(self::VISA_1, 1, 2020))
+        $createRequest->setCard(new CreateCardRequest(self::VISA_1, 1, 2020, 123))
             ->setCapture(false);
         $createResponse = $this->charges->createCharge($createRequest);
 

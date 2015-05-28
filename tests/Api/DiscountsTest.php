@@ -68,7 +68,7 @@ class DiscountsTest extends StripeTestCase
         $this->plans = new Plans($this->client);
 
         $this->couponId = $this->coupons->createCoupon($this->coupons->createCouponRequest('forever')->setPercentOff(50))->getId();
-        $customerRequest = $this->customers->createCustomerRequest()->setCard(new CreateCardRequest(self::VISA_1, 1, 2020));
+        $customerRequest = $this->customers->createCustomerRequest()->setCard(new CreateCardRequest(self::VISA_1, 1, 2020, 123));
         $this->customerId = $this->customers->createCustomer($customerRequest)->getId();
         $planRequest = $this->plans->createPlanRequest("discounts_test_plan" . rand(0, 999999), 350, 'usd', 'month', 'test plan');
         $this->planId = $this->plans->createPlan($planRequest)->getId();
