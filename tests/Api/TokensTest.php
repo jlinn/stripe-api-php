@@ -31,7 +31,7 @@ class TokensTest extends StripeTestCase
 
     public function testGetToken()
     {
-        $createRequest = $this->tokens->createCardTokenRequest(self::VISA_1, 1, 2020);
+        $createRequest = $this->tokens->createCardTokenRequest(self::VISA_1, 1, 2020, 123);
         $createResponse = $this->tokens->createCardToken($createRequest);
 
         $token = $this->tokens->getToken($createResponse->getId());
@@ -42,7 +42,7 @@ class TokensTest extends StripeTestCase
 
     public function testCreateCardToken()
     {
-        $createRequest = $this->tokens->createCardTokenRequest(self::VISA_1, 1, 2020);
+        $createRequest = $this->tokens->createCardTokenRequest(self::VISA_1, 1, 2020, 123);
         $createResponse = $this->tokens->createCardToken($createRequest);
 
         $this->assertInstanceOf(Tokens::TOKEN_RESPONSE_CLASS, $createResponse);

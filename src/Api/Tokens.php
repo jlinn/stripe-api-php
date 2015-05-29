@@ -55,11 +55,12 @@ class Tokens extends AbstractApi
      * @param string $number
      * @param string $expMonth
      * @param string $expYear
+     * @param string $cvc
      * @return CreateCardTokenRequest
      */
-    public function createCardTokenRequest($number, $expMonth, $expYear)
+    public function createCardTokenRequest($number, $expMonth, $expYear, $cvc = null)
     {
-        return new CreateCardTokenRequest($number, $expMonth, $expYear);
+        return new CreateCardTokenRequest($number, $expMonth, $expYear, $cvc);
     }
 
     /**

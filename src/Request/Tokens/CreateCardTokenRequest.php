@@ -69,12 +69,14 @@ class CreateCardTokenRequest
      * @param string $number
      * @param string $expMonth
      * @param string $expYear
+     * @param string|null $cvc
      */
-    public function __construct($number, $expMonth, $expYear)
+    public function __construct($number, $expMonth, $expYear, $cvc = null)
     {
         $this->number = $number;
         $this->expMonth = $expMonth;
         $this->expYear = $expYear;
+        $this->cvc = $cvc;
     }
 
     /**

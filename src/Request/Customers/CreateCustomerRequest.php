@@ -26,6 +26,11 @@ class CreateCustomerRequest extends AbstractCustomerRequest
     protected $trialEnd;
 
     /**
+     * @var float
+     */
+    protected $taxPercent;
+
+    /**
      * @return string
      */
     public function getPlan()
@@ -78,4 +83,23 @@ class CreateCustomerRequest extends AbstractCustomerRequest
         $this->trialEnd = $trialEnd;
         return $this;
     }
+
+    /**
+     * @param float $taxPercent
+     * @return $this
+     */
+    public function setTaxPercent($taxPercent)
+    {
+        $this->taxPercent = $taxPercent;
+        return $this;
+    }
+
+    /**
+     * @return float
+     */
+    public function getTaxPercent()
+    {
+        return $this->taxPercent;
+    }
+
 }

@@ -110,6 +110,12 @@ class SubscriptionResponse
     protected $trialStart;
 
     /**
+     * @Type("float")
+     * @var float
+     */
+    protected $taxPercent;
+
+    /**
      * @return PlanResponse
      */
     public function getPlan()
@@ -396,4 +402,23 @@ class SubscriptionResponse
         $this->trialStart = $trialStart;
         return $this;
     }
+
+    /**
+     * @param float $taxPercent
+     * @return $this
+     */
+    public function setTaxPercent($taxPercent)
+    {
+        $this->taxPercent = $taxPercent;
+        return $this;
+    }
+
+    /**
+     * @return float
+     */
+    public function getTaxPercent()
+    {
+        return $this->taxPercent;
+    }
+
 }

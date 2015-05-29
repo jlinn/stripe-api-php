@@ -43,6 +43,11 @@ class CreateSubscriptionRequest
     protected $applicationFeePercent;
 
     /**
+     * @var float
+     */
+    protected $taxPercent;
+
+    /**
      * @param string $plan
      */
     public function __construct($plan)
@@ -156,6 +161,24 @@ class CreateSubscriptionRequest
     {
         $this->trialEnd = $trialEnd;
         return $this;
+    }
+
+    /**
+     * @param float $taxPercent
+     * @return $this
+     */
+    public function setTaxPercent($taxPercent)
+    {
+        $this->taxPercent = $taxPercent;
+        return $this;
+    }
+
+    /**
+     * @return float
+     */
+    public function getTaxPercent()
+    {
+        return $this->taxPercent;
     }
 
 

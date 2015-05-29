@@ -169,6 +169,18 @@ class InvoiceResponse
     protected $forgiven;
 
     /**
+     * @Type("float")
+     * @var float
+     */
+    protected $taxPercent;
+
+    /**
+     * @Type("integer")
+     * @var int
+     */
+    protected $tax;
+
+    /**
      * @param int $amountDue
      * @return $this
      */
@@ -635,4 +647,41 @@ class InvoiceResponse
         $this->forgiven = $forgiven;
         return $this;
     }
+
+    /**
+     * @param int $tax
+     * @return $this
+     */
+    public function setTax($tax)
+    {
+        $this->tax = $tax;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getTax()
+    {
+        return $this->tax;
+    }
+
+    /**
+     * @param float $taxPercent
+     * @return $this
+     */
+    public function setTaxPercent($taxPercent)
+    {
+        $this->taxPercent = $taxPercent;
+        return $this;
+    }
+
+    /**
+     * @return float
+     */
+    public function getTaxPercent()
+    {
+        return $this->taxPercent;
+    }
+
 }

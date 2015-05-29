@@ -18,12 +18,14 @@ class CreateCardRequest extends UpdateCardRequest
      * @param string $number
      * @param int $expMonth
      * @param int $expYear
+     * @param mixed $cvc
      */
-    public function __construct($number, $expMonth, $expYear)
+    public function __construct($number, $expMonth, $expYear, $cvc = null)
     {
         $this->number = $number;
         $this->expMonth = $expMonth;
         $this->expYear = $expYear;
+        $this->cvc = $cvc;
     }
 
     /**
