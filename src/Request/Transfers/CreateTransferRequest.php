@@ -28,6 +28,11 @@ class CreateTransferRequest
     /**
      * @var string
      */
+    protected $destination;
+
+    /**
+     * @var string
+     */
     protected $description;
 
     /**
@@ -43,12 +48,12 @@ class CreateTransferRequest
     /**
      * @param int $amount
      * @param string $currency
-     * @param string $recipient
+     * @param string $destination
      */
-    public function __construct($amount, $currency, $recipient)
+    public function __construct($amount, $currency, $destination)
     {
         $this->setAmount($amount)->setCurrency($currency);
-        $this->setRecipient($recipient);
+        $this->setDestination($destination);
     }
 
     /**
@@ -124,6 +129,7 @@ class CreateTransferRequest
     }
 
     /**
+     * @deprecated use destination
      * @return string
      */
     public function getRecipient()
@@ -132,6 +138,7 @@ class CreateTransferRequest
     }
 
     /**
+     * @deprecated use destination
      * @param string $recipient
      * @return $this
      */
@@ -156,6 +163,24 @@ class CreateTransferRequest
     public function setStatementDescription($statementDescription)
     {
         $this->statementDescription = $statementDescription;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDestination()
+    {
+        return $this->destination;
+    }
+
+    /**
+     * @param string $destination
+     * @return $this
+     */
+    public function setDestination($destination)
+    {
+        $this->destination = $destination;
         return $this;
     }
 }

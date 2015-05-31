@@ -8,8 +8,11 @@
 namespace Stripe\Tests\Api;
 
 
+use Stripe\Api\Accounts;
 use Stripe\Api\Transfers;
+use Stripe\Request\Accounts\BankAccountRequest;
 use Stripe\Request\Transfers\ListTransfersRequest;
+use Stripe\Response\Accounts\AccountResponse;
 use Stripe\Response\Transfers\TransferResponse;
 use Stripe\Tests\StripeTestCase;
 
@@ -20,16 +23,21 @@ class TransfersTest extends StripeTestCase
      */
     protected $transfers;
 
+    /**
+     * @var Accounts
+     */
+    protected $accounts;
+
     protected function setUp()
     {
         parent::setUp();
         $this->transfers = new Transfers($this->client);
+        $this->accounts = new Accounts($this->client);
     }
 
     public function testCreateTransfer()
     {
-        $request = $this->transfers->createTransferRequest(350, "usd", "self");
-        $createResponse = $this->transfers->createTransfer($request);
+        $createResponse = $this->createTransfer();
 
         $this->assertInstanceOf(Transfers::TRANSFER_RESPONSE_CLASS, $createResponse);
         $this->assertEquals(350, $createResponse->getAmount());
@@ -66,7 +74,8 @@ class TransfersTest extends StripeTestCase
 
         $this->assertInstanceOf(Transfers::TRANSFER_RESPONSE_CLASS, $createResponse);
 
-        $this->setExpectedException('Stripe\StripeException', "Transfer cannot be canceled, because it has already been submitted. You can currently only cancel pending transfers.");
+        // we cannot cancel this transfer because it has already been accepted
+        $this->setExpectedException('Stripe\StripeException');
         $this->transfers->cancelTransfer($createResponse->getId());
     }
 
@@ -86,7 +95,25 @@ class TransfersTest extends StripeTestCase
     protected function createTransfer()
     {
         $request = $this->transfers->createTransferRequest(350, "usd", "self");
+        $request->setDestination($this->createAccount()->getId());
+        $request->setRecipient(null);
         return $this->transfers->createTransfer($request);
+    }
+
+    /**
+     * @return AccountResponse
+     */
+    protected function createAccount()
+    {
+        $request = $this->accounts->createAccountRequest();
+        $request->setEmail("foo" . $this->randomString() . "@bar.com");
+        $account = new BankAccountRequest();
+        $account->setCountry("us");
+        $account->setCurrency("usd");
+        $account->setRoutingNumber(self::ROUTING_NUMBER);
+        $account->setAccountNumber(self::ACCOUNT_NUMBER);
+        $request->setBankAccount($account);
+        return $this->accounts->createAccount($request);
     }
 }
  

@@ -45,4 +45,20 @@ abstract class StripeTestCase extends GuzzleTestCase
         // the API_KEY value should be set in phpunit.xml
         $this->client = new Client($_SERVER['API_KEY']);
     }
+
+    /**
+     * Generate and return a random string
+     * @param int $length length of the random string
+     * @return string a random string
+     */
+    protected function randomString($length = 10)
+    {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomString;
+    }
 }

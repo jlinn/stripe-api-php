@@ -34,4 +34,13 @@ class AccountsTest extends StripeTestCase
         $account = $this->accounts->getAccount();
         $this->assertInstanceOf(Accounts::ACCOUNT_RESPONSE_CLASS, $account);
     }
+
+    public function testCreateAccount()
+    {
+        $request = $this->accounts->createAccountRequest();
+        $request->setEmail("bob".$this->randomString()."@loblaw.com");
+        $account = $this->accounts->createAccount($request);
+
+        $this->assertInstanceOf(Accounts::ACCOUNT_RESPONSE_CLASS, $account);
+    }
 }

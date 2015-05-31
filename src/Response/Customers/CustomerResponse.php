@@ -37,7 +37,7 @@ class CustomerResponse
      * @Type("Stripe\Response\Cards\ListCardsResponse")
      * @var ListCardsResponse
      */
-    protected $cards;
+    protected $sources;
 
     /**
      * @Type("integer")
@@ -61,7 +61,7 @@ class CustomerResponse
      * @Type("string")
      * @var string
      */
-    protected $defaultCard;
+    protected $defaultSource;
 
     /**
      * @Type("boolean")
@@ -120,18 +120,18 @@ class CustomerResponse
     /**
      * @return \Stripe\Response\Cards\ListCardsResponse
      */
-    public function getCards()
+    public function getSources()
     {
-        return $this->cards;
+        return $this->sources;
     }
 
     /**
-     * @param \Stripe\Response\Cards\ListCardsResponse $cards
+     * @param \Stripe\Response\Cards\ListCardsResponse $sources
      * @return $this
      */
-    public function setCards($cards)
+    public function setSources($sources)
     {
-        $this->cards = $cards;
+        $this->sources = $sources;
         return $this;
     }
 
@@ -174,18 +174,18 @@ class CustomerResponse
     /**
      * @return string
      */
-    public function getDefaultCard()
+    public function getDefaultSource()
     {
-        return $this->defaultCard;
+        return $this->defaultSource;
     }
 
     /**
-     * @param string $defaultCard
+     * @param string $defaultSource
      * @return $this
      */
-    public function setDefaultCard($defaultCard)
+    public function setDefaultSource($defaultSource)
     {
-        $this->defaultCard = $defaultCard;
+        $this->defaultSource = $defaultSource;
         return $this;
     }
 

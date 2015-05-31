@@ -8,8 +8,10 @@
 namespace Stripe\Tests\Api;
 
 
+use Stripe\Api\Accounts;
 use Stripe\Api\Balance;
 use Stripe\Api\Transfers;
+use Stripe\Request\Accounts\BankAccountRequest;
 use Stripe\Request\Balance\ListBalanceHistoryRequest;
 use Stripe\Tests\StripeTestCase;
 
@@ -25,11 +27,17 @@ class BalanceTest extends StripeTestCase
      */
     protected $transfers;
 
+    /**
+     * @var Accounts
+     */
+    private $accounts;
+
     protected function setUp()
     {
         parent::setUp();
         $this->transfers = new Transfers($this->client);
         $this->balance = new Balance($this->client);
+        $this->accounts = new Accounts($this->client);
     }
 
     public function testGetBalance()
@@ -41,6 +49,19 @@ class BalanceTest extends StripeTestCase
 
     public function testGetBalanceTransaction()
     {
+        $this->markTestSkipped("Unable to set up external accounts for testing.");
+
+        $createAccountRequest = $this->accounts->createAccountRequest();
+        $createAccountRequest->setEmail("foo".$this->randomString()."@bar.com");
+        $createAccountRequest->setCountry("US");
+        $bankAccountRequest = new BankAccountRequest();
+        $bankAccountRequest->setCountry("US");
+        $bankAccountRequest->setCurrency("USD");
+        $bankAccountRequest->setAccountNumber($this::ACCOUNT_NUMBER);
+        $bankAccountRequest->setRoutingNumber($this::ROUTING_NUMBER);
+        $createAccountRequest->setBankAccount($bankAccountRequest);
+        $this->accounts->createAccount($createAccountRequest);
+
         $transfer = $this->transfers->createTransfer($this->transfers->createTransferRequest(350, "usd", "self"));
 
         $this->assertInstanceOf(Transfers::TRANSFER_RESPONSE_CLASS, $transfer);
