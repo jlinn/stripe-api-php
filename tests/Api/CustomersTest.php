@@ -31,15 +31,16 @@ class CustomersTest extends StripeTestCase
     {
         $balance = -500;
         $description = "testing";
-        $taxRate = 12.3;
+        //$taxRate = 12.3;
         $request = new CreateCustomerRequest();
-        $request->setAccountBalance($balance)->setDescription($description)->setTaxPercent($taxRate);
+        $request->setAccountBalance($balance)->setDescription($description);
+            //->setTaxPercent($taxRate);
         $response = $this->customers->createCustomer($request);
 
         $this->assertInstanceOf(Customers::CUSTOMER_RESPONSE_CLASS, $response);
         $this->assertEquals($balance, $response->getAccountBalance());
         $this->assertEquals($description, $request->getDescription());
-        $this->assertEquals($taxRate, $request->getTaxPercent());
+        //$this->assertEquals($taxRate, $request->getTaxPercent());
 
         $this->client->delete('customers/' . $response->getId());
     }
