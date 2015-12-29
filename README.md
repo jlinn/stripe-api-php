@@ -21,6 +21,21 @@ use Stripe\Stripe;
 $stripe = new Stripe("your_api_key");
 ```
 
+#### Charges calls
+```php
+// create a charge
+$request = $stripe->charges->createChargeRequest(350, "usd")->setCustomer($customer->getId());
+$stripe->charges->createCharge($request);
+
+//Without a Customer
+$card Request = new CreateCardRequest($number, $expMonth, $expYear, $cvc);
+$request = $stripe->charges->createChargeRequest(350, "usd")->setCard($card);
+$stripe->charges->createCharge($request);
+
+// retrieve a charge
+$charge = $stripe->charges->getCharge("charge_id");
+```
+
 #### Customers calls
 ```php
 use Stripe\Request\Cards\CreateCardRequest;
@@ -35,16 +50,6 @@ $customerId = $customer->getId();
 
 // retrieve a customer
 $customer = $stripe->customers()->getCustomer("customer_id");
-```
-
-#### Charges calls
-```php
-// create a charge
-$request = $stripe->charges->createChargeRequest(350, "usd")->setCustomer($customer->getId());
-$stripe->charges->createCharge($request);
-
-// retrieve a charge
-$charge = $stripe->charges->getCharge("charge_id");
 ```
 
 ## Development Status
