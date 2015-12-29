@@ -8,6 +8,8 @@
 namespace Stripe\Request\Accounts;
 
 
+use Stripe\Request\LegalEntity\CreateLegalEntityRequest;
+
 class CreateAccountRequest
 {
     /**
@@ -29,6 +31,16 @@ class CreateAccountRequest
      * @var BankAccountRequest
      */
     protected $bankAccount;
+
+    /**
+     * @var CreateLegalEntityRequest
+     */
+    protected $legalEntity;
+
+    /**
+     * @var CreateTOSAcceptance
+     */
+    protected $tosAcceptance;
 
     /**
      * @return boolean
@@ -99,6 +111,42 @@ class CreateAccountRequest
     public function setBankAccount($bankAccount)
     {
         $this->bankAccount = $bankAccount;
+        return $this;
+    }
+
+    /**
+     * @return CreateLegalEntityRequest
+     */
+    public function getLegalEntity()
+    {
+        return $this->legalEntity;
+    }
+
+    /**
+     * @param CreateLegalEntityRequest $legalEntity
+     * @return CreateAccountRequest
+     */
+    public function setLegalEntity($legalEntity)
+    {
+        $this->legalEntity = $legalEntity;
+        return $this;
+    }
+
+    /**
+     * @return CreateTOSAcceptance
+     */
+    public function getTosAcceptance()
+    {
+        return $this->tosAcceptance;
+    }
+
+    /**
+     * @param CreateTOSAcceptance $tosAcceptance
+     * @return CreateAccountRequest
+     */
+    public function setTosAcceptance($tosAcceptance)
+    {
+        $this->tosAcceptance = $tosAcceptance;
         return $this;
     }
 }

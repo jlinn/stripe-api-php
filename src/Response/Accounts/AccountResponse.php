@@ -8,6 +8,7 @@
 namespace Stripe\Response\Accounts;
 
 use JMS\Serializer\Annotation\Type;
+use Stripe\Response\LegalEntity\LegalEntityResponse;
 
 class AccountResponse
 {
@@ -51,13 +52,13 @@ class AccountResponse
      * @Type("boolean")
      * @var bool
      */
-    protected $chargeEnabled;
+    protected $chargesEnabled;
 
     /**
      * @Type("boolean")
      * @var bool
      */
-    protected $transferEnabled;
+    protected $transfersEnabled;
 
     /**
      * @Type("array")
@@ -82,6 +83,12 @@ class AccountResponse
      * @var string
      */
     protected $object;
+
+    /**
+     * @Type("Stripe\Response\LegalEntity\LegalEntityResponse")
+     * @var LegalEntityResponse
+     */
+    protected $legalEntity;
 
     /**
      * @param boolean $chargeEnabled
@@ -297,5 +304,23 @@ class AccountResponse
     public function getTransferEnabled()
     {
         return $this->transferEnabled;
+    }
+
+    /**
+     * @return LegalEntityResponse
+     */
+    public function getLegalEntity()
+    {
+        return $this->legalEntity;
+    }
+
+    /**
+     * @param LegalEntityResponse $legalEntity
+     * @return AccountResponse
+     */
+    public function setLegalEntity($legalEntity)
+    {
+        $this->legalEntity = $legalEntity;
+        return $this;
     }
 }
