@@ -91,21 +91,21 @@ class AccountResponse
     protected $legalEntity;
 
     /**
-     * @param boolean $chargeEnabled
+     * @param boolean $chargesEnabled
      * @return $this
      */
-    public function setChargeEnabled($chargeEnabled)
+    public function setChargesEnabled($chargesEnabled)
     {
-        $this->chargeEnabled = $chargeEnabled;
+        $this->chargesEnabled = $chargesEnabled;
         return $this;
     }
 
     /**
      * @return boolean
      */
-    public function getChargeEnabled()
+    public function getChargesEnabled()
     {
-        return $this->chargeEnabled;
+        return $this->chargesEnabled;
     }
 
     /**
@@ -289,21 +289,21 @@ class AccountResponse
     }
 
     /**
-     * @param boolean $transferEnabled
+     * @param boolean $transfersEnabled
      * @return $this
      */
-    public function setTransferEnabled($transferEnabled)
+    public function setTransferEnabled($transfersEnabled)
     {
-        $this->transferEnabled = $transferEnabled;
+        $this->transfersEnabled = $transfersEnabled;
         return $this;
     }
 
     /**
      * @return boolean
      */
-    public function getTransferEnabled()
+    public function getTransfersEnabled()
     {
-        return $this->transferEnabled;
+        return $this->transfersEnabled;
     }
 
     /**
