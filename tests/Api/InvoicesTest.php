@@ -76,7 +76,7 @@ class InvoicesTest extends StripeTestCase
         $request = $this->invoices->createInvoiceRequest($this->customerId);
         $invoice = $this->invoices->createInvoice($request);
 
-        $updatedInvoice = $this->invoices->updateInvoice($invoice->getId(), null, false, 'Updated Description', array('updated' => 'metadata'), 0.2);
+        $updatedInvoice = $this->invoices->updateInvoice($invoice->getId(), null, true, 'Updated Description', array('updated' => 'metadata'), 0.2);
         $this->assertInstanceOf(Invoices::INVOICE_RESPONSE_CLASS, $updatedInvoice);
 
         $this->assertEquals(null, $updatedInvoice->getApplicationFee());
