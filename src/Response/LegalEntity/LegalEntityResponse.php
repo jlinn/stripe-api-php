@@ -93,7 +93,7 @@ class LegalEntityResponse
     }
 
     /**
-     * @return string
+     * @return AddressResponse
      */
     public function getAddress()
     {

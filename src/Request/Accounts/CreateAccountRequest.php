@@ -44,6 +44,76 @@ class CreateAccountRequest
     protected $legalEntity;
 
     /**
+     * @var string
+     */
+    protected $businessLogo;
+
+    /**
+     * @var string
+     */
+    protected $businessName;
+
+    /**
+     * @var string
+     */
+    protected $businessPrimaryColor;
+
+    /**
+     * @var string
+     */
+    protected $businessUrl;
+
+    /**
+     * @var bool
+     */
+    protected $debitNegativeBalances;
+
+    /**
+     * @var CreateDeclineChargeRequest
+     */
+    protected $declineChargeOn;
+
+    /**
+     * @var string
+     */
+    protected $defaultCurrency;
+
+    /**
+     * @var array
+     */
+    protected $metadata;
+
+    /**
+     * @var string
+     */
+    protected $productDescription;
+
+    /**
+     * @var string
+     */
+    protected $statementDescriptor;
+
+    /**
+     * @var string
+     */
+    protected $supportEmail;
+
+    /**
+     * @var string
+     */
+    protected $supportPhone;
+
+    /**
+     * @var string
+     */
+    protected $supportUrl;
+
+    /**
+     * @var CreateTransferScheduleRequest
+     */
+    protected $transferSchedule;
+
+    /**
      * @var CreateTOSAcceptance
      */
     protected $tosAcceptance;
@@ -157,21 +227,256 @@ class CreateAccountRequest
     }
 
     /**
-     * @return BankAccountRequest
+     * @return string
      */
-    public function getBankAccount()
+    public function getBusinessLogo()
     {
-        return $this->bankAccount;
+        return $this->businessLogo;
     }
 
     /**
-     * @param BankAccountRequest $bankAccount
+     * @param string $businessLogo
      * @return CreateAccountRequest
      * @deprecated Use external accounts instead of bank accounts.
      */
-    public function setBankAccount($bankAccount)
+    public function setBusinessLogo($businessLogo)
     {
-        $this->bankAccount = $bankAccount;
+        $this->businessLogo = $businessLogo;
         return $this;
     }
+
+    /**
+     * @return string
+     */
+    public function getBusinessName()
+    {
+        return $this->businessName;
+    }
+
+    /**
+     * @param string $businessName
+     * @return CreateAccountRequest
+     */
+    public function setBusinessName($businessName)
+    {
+        $this->businessName = $businessName;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBusinessPrimaryColor()
+    {
+        return $this->businessPrimaryColor;
+    }
+
+    /**
+     * @param string $businessPrimaryColor
+     * @return CreateAccountRequest
+     */
+    public function setBusinessPrimaryColor($businessPrimaryColor)
+    {
+        $this->businessPrimaryColor = $businessPrimaryColor;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBusinessUrl()
+    {
+        return $this->businessUrl;
+    }
+
+    /**
+     * @param string $businessUrl
+     * @return CreateAccountRequest
+     */
+    public function setBusinessUrl($businessUrl)
+    {
+        $this->businessUrl = $businessUrl;
+        return $this;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isDebitNegativeBalances()
+    {
+        return $this->debitNegativeBalances;
+    }
+
+    /**
+     * @param boolean $debitNegativeBalances
+     * @return CreateAccountRequest
+     */
+    public function setDebitNegativeBalances($debitNegativeBalances)
+    {
+        $this->debitNegativeBalances = $debitNegativeBalances;
+        return $this;
+    }
+
+    /**
+     * @return CreateDeclineChargeRequest
+     */
+    public function getDeclineChargeOn()
+    {
+        return $this->declineChargeOn;
+    }
+
+    /**
+     * @param CreateDeclineChargeRequest $declineChargeOn
+     * @return CreateAccountRequest
+     */
+    public function setDeclineChargeOn($declineChargeOn)
+    {
+        $this->declineChargeOn = $declineChargeOn;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDefaultCurrency()
+    {
+        return $this->defaultCurrency;
+    }
+
+    /**
+     * @param string $defaultCurrency
+     * @return CreateAccountRequest
+     */
+    public function setDefaultCurrency($defaultCurrency)
+    {
+        $this->defaultCurrency = $defaultCurrency;
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getMetadata()
+    {
+        return $this->metadata;
+    }
+
+    /**
+     * @param array $metadata
+     * @return CreateAccountRequest
+     */
+    public function setMetadata($metadata)
+    {
+        $this->metadata = $metadata;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getProductDescription()
+    {
+        return $this->productDescription;
+    }
+
+    /**
+     * @param string $productDescription
+     * @return CreateAccountRequest
+     */
+    public function setProductDescription($productDescription)
+    {
+        $this->productDescription = $productDescription;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getStatementDescriptor()
+    {
+        return $this->statementDescriptor;
+    }
+
+    /**
+     * @param string $statementDescriptor
+     * @return CreateAccountRequest
+     */
+    public function setStatementDescriptor($statementDescriptor)
+    {
+        $this->statementDescriptor = $statementDescriptor;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSupportEmail()
+    {
+        return $this->supportEmail;
+    }
+
+    /**
+     * @param string $supportEmail
+     * @return CreateAccountRequest
+     */
+    public function setSupportEmail($supportEmail)
+    {
+        $this->supportEmail = $supportEmail;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSupportPhone()
+    {
+        return $this->supportPhone;
+    }
+
+    /**
+     * @param string $supportPhone
+     * @return CreateAccountRequest
+     */
+    public function setSupportPhone($supportPhone)
+    {
+        $this->supportPhone = $supportPhone;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSupportUrl()
+    {
+        return $this->supportUrl;
+    }
+
+    /**
+     * @param string $supportUrl
+     * @return CreateAccountRequest
+     */
+    public function setSupportUrl($supportUrl)
+    {
+        $this->supportUrl = $supportUrl;
+        return $this;
+    }
+
+    /**
+     * @return CreateTransferScheduleRequest
+     */
+    public function getTransferSchedule()
+    {
+        return $this->transferSchedule;
+    }
+
+    /**
+     * @param CreateTransferScheduleRequest $transferSchedule
+     * @return CreateAccountRequest
+     */
+    public function setTransferSchedule($transferSchedule)
+    {
+        $this->transferSchedule = $transferSchedule;
+        return $this;
+    }
+
 }
