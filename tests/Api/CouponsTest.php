@@ -67,12 +67,18 @@ class CouponsTest extends StripeTestCase
 
     public function testListCoupons()
     {
+        $duration = 'once';
+        $percentOff = 50;
+        $request = $this->coupons->createCouponRequest($duration)->setPercentOff($percentOff);
+        $createResponse = $this->coupons->createCoupon($request);
+
         $request = new ListRequest();
         $request->setLimit(1);
         $listResponse = $this->coupons->listCoupons($request);
 
         $this->assertInstanceOf(Coupons::LIST_COUPONS_RESPONSE_CLASS, $listResponse);
         $this->assertEquals(1, sizeof($listResponse->getData()));
+        $this->client->delete('coupons/' . $createResponse->getId());
     }
 
     /**

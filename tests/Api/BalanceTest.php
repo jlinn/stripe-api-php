@@ -49,8 +49,6 @@ class BalanceTest extends StripeTestCase
 
     public function testGetBalanceTransaction()
     {
-        $this->markTestSkipped("Unable to set up external accounts for testing.");
-
         $createAccountRequest = $this->accounts->createAccountRequest();
         $createAccountRequest->setEmail("foo".$this->randomString()."@bar.com");
         $createAccountRequest->setCountry("US");
@@ -60,9 +58,10 @@ class BalanceTest extends StripeTestCase
         $bankAccountRequest->setAccountNumber($this::ACCOUNT_NUMBER);
         $bankAccountRequest->setRoutingNumber($this::ROUTING_NUMBER);
         $createAccountRequest->setBankAccount($bankAccountRequest);
-        $this->accounts->createAccount($createAccountRequest);
+        $createAccountRequest->setManaged(true);
+        $account = $this->accounts->createAccount($createAccountRequest);
 
-        $transfer = $this->transfers->createTransfer($this->transfers->createTransferRequest(350, "usd", "self"));
+        $transfer = $this->transfers->createTransfer($this->transfers->createTransferRequest(100, "usd", $account->getId()));
 
         $this->assertInstanceOf(Transfers::TRANSFER_RESPONSE_CLASS, $transfer);
 
