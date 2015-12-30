@@ -29,8 +29,14 @@ class CreateAccountRequest
 
     /**
      * @var BankAccountRequest
+     * @deprecated Use external accounts instead of bank account. Changed in API.
      */
     protected $bankAccount;
+
+    /**
+     * @var CreateExternalAccountRequest
+     */
+    protected $externalAccount;
 
     /**
      * @var CreateLegalEntityRequest
@@ -97,20 +103,20 @@ class CreateAccountRequest
     }
 
     /**
-     * @return BankAccountRequest
+     * @return CreateExternalAccountRequest
      */
-    public function getBankAccount()
+    public function getExternalAccount()
     {
-        return $this->bankAccount;
+        return $this->externalAccount;
     }
 
     /**
-     * @param BankAccountRequest $bankAccount
-     * @return $this
+     * @param CreateExternalAccountRequest $externalAccount
+     * @return CreateAccountRequest
      */
-    public function setBankAccount($bankAccount)
+    public function setExternalAccount($externalAccount)
     {
-        $this->bankAccount = $bankAccount;
+        $this->externalAccount = $externalAccount;
         return $this;
     }
 
@@ -147,6 +153,25 @@ class CreateAccountRequest
     public function setTosAcceptance($tosAcceptance)
     {
         $this->tosAcceptance = $tosAcceptance;
+        return $this;
+    }
+
+    /**
+     * @return BankAccountRequest
+     */
+    public function getBankAccount()
+    {
+        return $this->bankAccount;
+    }
+
+    /**
+     * @param BankAccountRequest $bankAccount
+     * @return CreateAccountRequest
+     * @deprecated Use external accounts instead of bank accounts.
+     */
+    public function setBankAccount($bankAccount)
+    {
+        $this->bankAccount = $bankAccount;
         return $this;
     }
 }

@@ -91,6 +91,12 @@ class AccountResponse
     protected $legalEntity;
 
     /**
+     * @Type("Stripe\Response\Accounts\ListExternalAccountsResponse")
+     * @var ListExternalAccountsResponse
+     */
+    protected $externalAccounts;
+
+    /**
      * @param boolean $chargesEnabled
      * @return $this
      */
