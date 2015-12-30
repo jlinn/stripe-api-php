@@ -479,4 +479,23 @@ class CreateAccountRequest
         return $this;
     }
 
+    /**
+     * @return BankAccountRequest
+     */
+    public function getBankAccount()
+    {
+        return $this->bankAccount;
+    }
+
+    /**
+     * @param BankAccountRequest $bankAccount
+     * @return CreateAccountRequest
+     * @deprecated API calls are being changed to external accounts
+     */
+    public function setBankAccount($bankAccount)
+    {
+        $this->bankAccount = $bankAccount;
+        return $this;
+    }
+
 }

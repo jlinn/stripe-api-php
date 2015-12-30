@@ -80,7 +80,7 @@ class InvoicesTest extends StripeTestCase
         $this->assertInstanceOf(Invoices::INVOICE_RESPONSE_CLASS, $updatedInvoice);
 
         $this->assertEquals(null, $updatedInvoice->getApplicationFee());
-        $this->assertEquals(false, $updatedInvoice->getClosed());
+        $this->assertEquals(true, $updatedInvoice->getClosed());
         $this->assertEquals('Updated Description', $updatedInvoice->getDescription());
         $this->assertEquals(array('updated' => 'metadata'), $updatedInvoice->getMetadata());
         $this->assertEquals(0.2, $updatedInvoice->getTaxPercent());
